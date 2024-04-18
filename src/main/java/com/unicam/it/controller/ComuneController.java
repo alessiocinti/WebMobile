@@ -73,13 +73,12 @@ public class ComuneController {
         }
     }
 
-    @DeleteMapping("/product/{id}")
+    @DeleteMapping("/comune/{id}")
     public ResponseEntity<Object> delComune(@PathVariable("id") String id)
     {
         if (comuneRepository.existsById(id)) {
             comuneRepository.deleteById(id);
 
-            // Update prodotti.txt (assuming simple deletion by ID)
             try {
                 List<String> updatedLines = new ArrayList<>();
                 BufferedReader reader = new BufferedReader(new FileReader(pathComune));
@@ -91,7 +90,6 @@ public class ComuneController {
                 }
                 reader.close();
 
-                // Rewrite file with updated content
                 BufferedWriter writer = new BufferedWriter(new FileWriter(pathComune));
                 for (String updatedLine : updatedLines) {
                     writer.write(updatedLine + System.lineSeparator());
@@ -101,7 +99,6 @@ public class ComuneController {
                 return new ResponseEntity<>("Comune Cancellato", HttpStatus.OK);
             } catch (IOException e) {
                 System.err.println("Error updating comuni.txt file: " + e.getMessage());
-                // You may want to consider returning an error response here
                 return new ResponseEntity<>("Errore durante la cancellazione", HttpStatus.INTERNAL_SERVER_ERROR);
             }
         } else {
