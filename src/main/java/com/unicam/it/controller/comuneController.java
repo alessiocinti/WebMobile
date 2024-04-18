@@ -1,8 +1,7 @@
 package com.unicam.it.controller;
 
 
-import com.unicam.it.entita.Comune;
-import com.unicam.it.repository.ComuneRepository;
+import com.unicam.it.entita.comune;
 import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
@@ -15,22 +14,22 @@ import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:63342")
 @RestController
-public class ComuneController {
+public class comuneController {
 
-    private ComuneRepository comuneRepository;
+    private com.unicam.it.repository.comuneRepository comuneRepository;
 
-    //private String pathComune = "C:/Users/Alessio/OneDrive/Desktop/IdSProject/src/main/java/com/unicam/it/dati/comuni.txt";
-    private String pathComune = "C:/Users/frato/OneDrive/Desktop/IdSProject/src/main/java/com/unicam/it/dati/comuni.txt";
+    private String pathComune = "C:/Users/Alessio/OneDrive/Desktop/IdSProject/src/main/java/com/unicam/it/dati/comuni.txt";
+    //private String pathComune = "C:/Users/frato/OneDrive/Desktop/IdSProject/src/main/java/com/unicam/it/dati/comuni.txt";
 
     @Autowired
-    public ComuneController(ComuneRepository comuneRepository){
+    public comuneController(com.unicam.it.repository.comuneRepository comuneRepository){
         this.comuneRepository = comuneRepository;
         try (BufferedReader reader = new BufferedReader(new FileReader(pathComune))){
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] comuneData = line.split(" ");
                 if(comuneData.length == 3){
-                    Comune comune = new Comune();
+                    comune comune = new comune();
                     comune.setId(comuneData[0]);
                     comune.setName(comuneData[1]);
                     comune.setRegione(comuneData[2]);
@@ -56,7 +55,7 @@ public class ComuneController {
     }
 
     @PostMapping("/comune")
-    public ResponseEntity<Object> addComune(@RequestBody Comune comune)
+    public ResponseEntity<Object> addComune(@RequestBody comune comune)
     {
         if (!comuneRepository.existsById(comune.getId())) {
             comuneRepository.save(comune);

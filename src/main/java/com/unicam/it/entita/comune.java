@@ -2,9 +2,10 @@ package com.unicam.it.entita;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
-public class Comune {
+public class comune {
 
     @Id
     private String id;
