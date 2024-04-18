@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Comuni</title>
+</head>
+<body>
+
+<h1>Client Comuni</h1>
+
+<button onclick="getComuni()">Get Comuni</button>
+<h2>Lista Comuni</h2>
+<ul id="listaComuni"></ul>
+
+<h2>Aggiungi Comune</h2>
+<label for="comuneId">Comune ID:</label>
+<input type="text" id="comuneId">
+<label for="comuneName">Comune Name:</label>
+<input type="text" id="comuneName">
+<label for="comuneRegione">Comune Regione:</label>
+<input type="text" id="comuneRegione">
+<button onclick="createComune()">Aggiungi Comune</button>
+
+<h2>Elimina Comune</h2>
+<label for="deleteComuneId">Comune ID:</label>
+<input type="text" id="deleteComuneId">
+<button onclick="deleteComune()">Elimina Comune</button>
+
+<h2>Ricerca Comune</h2>
+<label for="getComuneId">Comune ID:</label>
+<input type="text" id="getComuneId">
+<button onclick="getComuneById()">Ricerca Comune</button>
+<div id="comuneResult"></div>
+
+
+<script>
+    const baseUrl = 'http://localhost:8080';
+
+    function getComuni() {
+        fetch(`${baseUrl}/comuni`)
+            .then(response => response.json())
+            .then(data => {
+                const listaComuni = document.getElementById('listaComuni');
+                listaComuni.innerHTML = '';
+
+                data.forEach(comune => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `ID: ${comune.id}, Name: ${comune.name}, Regione: ${comune.regione}`;
+                    listaComuni.appendChild(listItem);
+                });
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
+    function createComune() {
+        const comuneId = document.getElementById('comuneId').value;
+        const comuneName = document.getElementById('comuneName').value;
+        const comuneRegione = document.getElementById('comuneRegione').value;
+        const comune = { id: comuneId, name: comuneName, regione: comuneRegione };
+
+        fetch(`${baseUrl}/comune`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(comune),
+        })
+            .then(response => response.text())
+            .then(data => console.log(data))
+            .catch(error => console.error('Error:', error));
+    }
+
+    function deleteComune() {
+        const comuneId = document.getElementById('deleteComuneId').value;
+
+        fetch(`${baseUrl}/comune/${comuneId}`, {
+            method: 'DELETE',
+        })
+            .then(response => response.text())
+            .then(data => console.log(data))
+            .catch(error => console.error('Error:', error));
+    }
+
+    function getComuneById() {
+        const comuneId = document.getElementById('getComuneId').value;
+
+        fetch(`${baseUrl}/comune?id=${comuneId}`)
+            .then(response => response.json())
+            .then(data => {
+                const resultDiv = document.getElementById('comuneResult');
+                resultDiv.innerHTML = `<p>ID: ${data.id}, Name: ${data.name}, Regione: ${data.regione}</p>`;
+            })
+            .catch(error => console.error('Error:', error));
+    }
+</script>
+</body>
+</html>
