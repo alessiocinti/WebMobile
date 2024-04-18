@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client PuntiDiRilievo</title>
+</head>
+<body>
+
+<h1>Client PuntiDiRilievo</h1>
+
+<button onclick="getPuntiDiRilievo()">Get PuntiDiRilievo</button>
+<h2>Lista Punti Di Rilievo</h2>
+<ul id="listaPuntiDiRilievo"></ul>
+
+<h2>Aggiungi PuntoDiRilievo</h2>
+<label for="puntoDiRilievoId">PuntoDiRilievo ID:</label>
+<input type="text" id="puntoDiRilievoId">
+<label for="puntoDiRilievoName">PuntoDiRilievo Name:</label>
+<input type="text" id="puntoDiRilievoName">
+<label for="puntoDiRilievoComuneDiRiferimento">ComuneDiRiferimento:</label>
+<input type="text" id="puntoDiRilievoComuneDiRiferimento">
+<button onclick="createPuntoDiRilievo()">Aggiungi PuntoDiRilievo</button>
+
+<h2>Elimina PuntoDiRilievo</h2>
+<label for="deletePuntoDiRilievoId">PuntoDiRilievo ID:</label>
+<input type="text" id="deletePuntoDiRilievoId">
+<button onclick="deletePuntoDiRilievo()">Elimina PuntoDiRilievo</button>
+
+<h2>Ricerca PuntoDiRilievo</h2>
+<label for="getPuntoDiRilievoId">PuntoDiRilievo ID:</label>
+<input type="text" id="getPuntoDiRilievoId">
+<button onclick="getPuntoDiRilievoById()">Ricerca PuntoDiRilievo</button>
+<div id="puntoDiRilievoResult"></div>
+
+
+<script>
+    const baseUrl = 'http://localhost:8080';
+
+    function getPuntiDiRilievo() {
+        fetch(`${baseUrl}/puntiDiRilievo`)
+            .then(response => response.json())
+            .then(data => {
+                const listaPuntiDiRilievo = document.getElementById('listaPuntiDiRilievo');
+                listaPuntiDiRilievo.innerHTML = '';
+
+                data.forEach(puntoDiRilievo => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `ID: ${puntoDiRilievo.id}, Name: ${puntoDiRilievo.name}, ComuneDiRiferimento: ${puntoDiRilievo.comuneDiRiferimento}`;
+                    listaPuntiDiRilievo.appendChild(listItem);
+                });
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
+    function createPuntoDiRilievo() {
+        const puntoDiRilievoId = document.getElementById('puntoDiRilievoId').value;
+        const puntoDiRilievoName = document.getElementById('puntoDiRilievoName').value;
+        const puntoDiRilievoComuneDiRiferimento = document.getElementById('puntoDiRilievoComuneDiRiferimento').value;
+        const puntoDiRilievo = { id: puntoDiRilievoId, name: puntoDiRilievoName, comuneDiRiferimento: puntoDiRilievoComuneDiRiferimento };
+
+        fetch(`${baseUrl}/puntoDiRilievo`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(puntoDiRilievo),
+        })
+            .then(response => response.text())
+            .then(data => console.log(data))
+            .catch(error => console.error('Error:', error));
+    }
+
+    function deletePuntoDiRilievo() {
+        const puntoDiRilievoId = document.getElementById('deletePuntoDiRilievoId').value;
+
+        fetch(`${baseUrl}/puntoDiRilievo/${puntoDiRilievoId}`, {
+            method: 'DELETE',
+        })
+            .then(response => response.text())
+            .then(data => console.log(data))
+            .catch(error => console.error('Error:', error));
+    }
+
+    function getPuntoDiRilievoById() {
+        const puntoDiRilievoId = document.getElementById('getPuntoDiRilievoId').value;
+
+        fetch(`${baseUrl}/puntoDiRilievo?id=${puntoDiRilievoId}`)
+            .then(response => response.json())
+            .then(data => {
+                const resultDiv = document.getElementById('puntoDiRilievoResult');
+                resultDiv.innerHTML = `<p>ID: ${data.id}, Name: ${data.name}, ComuneDiRiferimento: ${data.comuneDiRiferimento}</p>`;
+            })
+            .catch(error => console.error('Error:', error));
+    }
+</script>
+</body>
+</html>
