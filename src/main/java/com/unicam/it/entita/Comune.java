@@ -7,7 +7,7 @@ import jakarta.persistence.Id;
 public class Comune {
 
     @Id
-    private Integer id;
+    private String id;
 
     private String name;
 
@@ -15,8 +15,8 @@ public class Comune {
 
 
 
-    public Integer getId() {return id;}
-    public void setId(Integer id) {this.id = id;}
+    public String getId() {return id;}
+    public void setId(String id) {this.id = id;}
 
     public String getName() {return name;}
     public void setName(String name) {this.name = name;}
