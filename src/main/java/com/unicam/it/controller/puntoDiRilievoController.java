@@ -1,7 +1,6 @@
 package com.unicam.it.controller;
 
 
-import com.unicam.it.entita.comune;
 import com.unicam.it.entita.puntoDiRilievo;
 import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +17,8 @@ public class puntoDiRilievoController {
 
     private com.unicam.it.repository.puntoDiRilievoRepository puntoDiRilievoRepository;
 
-    private String pathPuntiDiRilievo = "C:/Users/Alessio/OneDrive/Desktop/IdSProject/src/main/java/com/unicam/it/dati/puntiDiRilievo.txt";
-    //private String pathPuntiDiRilievo = "C:/Users/frato/OneDrive/Desktop/IdSProject/src/main/java/com/unicam/it/dati/puntiDiRilievo.txt";
+    //private String pathPuntiDiRilievo = "C:/Users/Alessio/OneDrive/Desktop/IdSProject/src/main/java/com/unicam/it/dati/puntiDiRilievo.txt";
+    private String pathPuntiDiRilievo = "C:/Users/frato/OneDrive/Desktop/IdSProject/src/main/java/com/unicam/it/dati/puntiDiRilievo.txt";
 
     @Autowired
     public puntoDiRilievoController(com.unicam.it.repository.puntoDiRilievoRepository puntoDiRilievoRepository){
@@ -35,11 +34,11 @@ public class puntoDiRilievoController {
                     puntoDiRilievo.setComuneDiRiferimento(puntoDiRilievoData[2]);
                     puntoDiRilievoRepository.save(puntoDiRilievo);
                 }else {
-                    System.err.println("Invalid product data in comune.txt: " + line);
+                    System.err.println("Invalid product data in puntiDiRilievo.txt: " + line);
                 }
             }
         }catch (IOException e){
-            System.err.println("Error reading comune.txt file: " + e.getMessage());
+            System.err.println("Error reading puntiDiRilievo.txt file: " + e.getMessage());
         }
     }
 

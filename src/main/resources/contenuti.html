@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Contenuti</title>
+</head>
+<body>
+
+<h1>Client Contenuti</h1>
+
+<h2>Aggiungi Contenuto</h2>
+<label for="contenutoId">Contenuto ID:</label>
+<input type="text" id="contenutoId">
+<label for="contenutoDesc">Descrizione Contenuto:</label>
+<input type="text" id="contenutoDesc">
+<label for="contenutoComune">Comune Di Riferimento:</label>
+<input type="text" id="contenutoComune">
+<button onclick="createContenuto()">Aggiungi Contenuto</button>
+
+<h2>Elimina Contenuto</h2>
+<label for="deleteContenutoId">Contenuto ID:</label>
+<input type="text" id="deleteContenutoId">
+<button onclick="deleteContenuto()">Elimina Contenuto</button>
+
+<h2>Ricerca Contenuto</h2>
+<label for="getContenutoId">Contenuto ID:</label>
+<input type="text" id="getContenutoId">
+<button onclick="getContenutoById()">Ricerca Contenuto</button>
+<div id="contenutoResult"></div>
+
+
+<script>
+    const baseUrl = 'http://localhost:8080';
+
+    function createContenuto() {
+        const contenutoId = document.getElementById('contenutoId').value;
+        const contenutoDesc = document.getElementById('contenutoDesc').value;
+        const contenutoComune = document.getElementById('contenutoComune').value;
+        const contenuto = { id: contenutoId, desc: contenutoDesc, comune: contenutoComune };
+
+        fetch(`${baseUrl}/contenuto`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(contenuto),
+        })
+            .then(response => response.text())
+            .then(data => console.log(data))
+            .catch(error => console.error('Error:', error));
+    }
+
+    function deleteContenuto() {
+        const contenutoId = document.getElementById('deleteContenutoId').value;
+
+        fetch(`${baseUrl}/contenuto/${contenutoId}`, {
+            method: 'DELETE',
+        })
+            .then(response => response.text())
+            .then(data => console.log(data))
+            .catch(error => console.error('Error:', error));
+    }
+
+    function getContenutoById() {
+        const contenutoId = document.getElementById('getContenutoId').value;
+
+        fetch(`${baseUrl}/contenuto?id=${contenutoId}`)
+            .then(response => response.json())
+            .then(data => {
+                const resultDiv = document.getElementById('contenutoResult');
+                resultDiv.innerHTML = `<p>ID: ${data.id}, Desc: ${data.desc}, Comune: ${data.comune}</p>`;
+            })
+            .catch(error => console.error('Error:', error));
+    }
+</script>
+</body>
+</html>
