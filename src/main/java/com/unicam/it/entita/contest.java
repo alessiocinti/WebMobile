@@ -12,8 +12,8 @@ public class contest {
     private String id;
     private String titoloContest;
     private String descrizioneContest;
-    private Date dataInizioContest;
-    private Date dataFineContest;
+    private String dataInizioContest;
+    private String dataFineContest;
     private String comuneDiRiferimento;
 
 
@@ -27,11 +27,11 @@ public class contest {
     public String getDescrizioneContest() {return descrizioneContest;}
     public void setDescrizioneContest(String descrizioneContest) {this.descrizioneContest = descrizioneContest;}
 
-    public Date getDataInizioContest() {return dataInizioContest;}
-    public void setDataInizioContest(Date dataInizioContest) {this.dataInizioContest = dataInizioContest;}
+    public String getDataInizioContest() {return dataInizioContest;}
+    public void setDataInizioContest(String dataInizioContest) {this.dataInizioContest = dataInizioContest;}
 
-    public Date getDataFineContest() {return dataFineContest;}
-    public void setDataFineContest(Date dataFineContest) {this.dataFineContest = dataFineContest;}
+    public String getDataFineContest() {return dataFineContest;}
+    public void setDataFineContest(String dataFineContest) {this.dataFineContest = dataFineContest;}
 
     public String getComuneDiRiferimento() {return comuneDiRiferimento;}
     public void setComuneDiRiferimento(String comuneDiRiferimento) {this.comuneDiRiferimento = comuneDiRiferimento;}

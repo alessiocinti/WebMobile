@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Contest</title>
+</head>
+<body>
+
+<h1>Client Contest</h1>
+
+<h2>Aggiungi Contest</h2>
+<label for="contestId">Contest ID:</label>
+<input type="text" id="contestId">
+<label for="contestTitolo">Contest Titolo:</label>
+<input type="text" id="contestTitolo">
+<label for="contestDescrizione">Descrizione Contest:</label>
+<input type="text" id="contestDescrizione">
+<label for="dataInizioContest">DataInizioContest:</label>
+<input type="text" id="dataInizioContest">
+<label for="dataFineContest">Data Fine Contest:</label>
+<input type="text" id="dataFineContest">
+<label for="comuneDiRiferimentoContest">Comune di Riferimento:</label>
+<input type="text" id="comuneDiRiferimentoContest">
+<button onclick="createContest()">Aggiungi Contest</button>
+
+<h2>Elimina Contest</h2>
+<label for="deleteContestId">Contest ID:</label>
+<input type="text" id="deleteContestId">
+<button onclick="deleteContest()">Elimina Contest</button>
+
+<h2>Ricerca Contest</h2>
+<label for="getContestId">Contest ID:</label>
+<input type="text" id="getContestId">
+<button onclick="getContestById()">Ricerca Contest</button>
+<div id="contestResult"></div>
+
+
+<script>
+    const baseUrl = 'http://localhost:8080';
+
+
+    function createContest() {
+        const contestId = document.getElementById('contestId').value;
+        const contestTitolo = document.getElementById('contestTitolo').value;
+        const contestDescrizione = document.getElementById('contestDescrizione').value;
+        const dataInizioContest = document.getElementById('dataInizioContest').value;
+        const dataFineContest = document.getElementById('dataFineContest').value;
+        const comuneDiRiferimentoContest = document.getElementById('comuneDiRiferimentoContest').value;
+        const contest = { id: contestId, titoloContest: contestTitolo, descrizioneContest: contestDescrizione, dataInizioContest: dataInizioContest, dataFineContest: dataFineContest, comuneDiRiferimento: comuneDiRiferimentoContest};
+
+        fetch(`${baseUrl}/contest`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(contest),
+        })
+            .then(response => response.text())
+            .then(data => console.log(data))
+            .catch(error => console.error('Error:', error));
+    }
+
+    function deleteContest() {
+        const contestId = document.getElementById('deleteContestId').value;
+
+        fetch(`${baseUrl}/contest/${contestId}`, {
+            method: 'DELETE',
+        })
+            .then(response => response.text())
+            .then(data => console.log(data))
+            .catch(error => console.error('Error:', error));
+    }
+
+    function getContestById() {
+        const contestId = document.getElementById('getContestId').value;
+
+        fetch(`${baseUrl}/contest?id=${contestId}`)
+            .then(response => response.json())
+            .then(data => {
+                const resultDiv = document.getElementById('contestResult');
+                resultDiv.innerHTML = `<p>Id: ${data.id}, titolo: ${data.titoloContest}, descrizione: ${data.descrizioneContest}, dataInizio: ${data.dataInizioContest}, dataFine: ${data.dataFineContest}, comuneDiRiferimento: ${data.comuneDiRiferimento}</p>`;
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
+
+
+</script>
+</body>
+</html>
