@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Itinerari</title>
+</head>
+<body>
+
+<h1>Client Itinerari</h1>
+
+<h2>Aggiungi Itinerario</h2>
+<label for="itinerarioId">Itinerario ID:</label>
+<input type="text" id="itinerarioId">
+<label for="itinerarioTitolo">Titolo Itinerario:</label>
+<input type="text" id="itinerarioTitolo">
+<label for="itinerarioComune">Comune di Riferimento:</label>
+<input type="text" id="itinerarioComune">
+<label for="itinerarioPunti">Punti Di Rilievo:</label>
+<input type="text" id="itinerarioPunti">
+<button onclick="createItinerario()">Aggiungi Itinerario</button>
+
+<h2>Elimina Itinerario</h2>
+<label for="deleteItinerarioId">Itinerario ID:</label>
+<input type="text" id="deleteItinerarioId">
+<button onclick="deleteItinerario()">Elimina Itinerario</button>
+
+<h2>Ricerca Itinerario</h2>
+<label for="getItinerarioId">Itinerario ID:</label>
+<input type="text" id="getItinerarioId">
+<button onclick="getItinerarioById()">Ricerca Itinerario</button>
+<div id="itinerarioResult"></div>
+
+
+<script>
+    const baseUrl = 'http://localhost:8080';
+
+    function createItinerario() {
+        const itinerarioId = document.getElementById('itinerarioId').value;
+        const itinerarioTitolo = document.getElementById('itinerarioTitolo').value;
+        const itinerarioComune = document.getElementById('itinerarioComune').value;
+        const itinerarioPunti = document.getElementById('itinerarioPunti').value;
+        const itinerario = { id: itinerarioId, titolo: itinerarioTitolo, comune: itinerarioComune, punti: itinerarioPunti };
+
+        fetch(`${baseUrl}/itinerario`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(itinerario),
+        })
+            .then(response => response.text())
+            .then(data => console.log(data))
+            .catch(error => console.error('Error:', error));
+    }
+
+    function deleteItinerario() {
+        const itinerarioId = document.getElementById('deleteItinerarioId').value;
+
+        fetch(`${baseUrl}/itinerario/${itinerarioId}`, {
+            method: 'DELETE',
+        })
+            .then(response => response.text())
+            .then(data => console.log(data))
+            .catch(error => console.error('Error:', error));
+    }
+
+    function getItinerarioById() {
+        const itinerarioId = document.getElementById('getItinerarioId').value;
+
+        fetch(`${baseUrl}/itinerario?id=${itinerarioId}`)
+            .then(response => response.json())
+            .then(data => {
+                const resultDiv = document.getElementById('itinerarioResult');
+                resultDiv.innerHTML = `<p>ID: ${data.id}, Titolo: ${data.titolo}, Comune: ${data.comune}, Punti: ${data.punti}</p>`;
+            })
+            .catch(error => console.error('Error:', error));
+    }
+</script>
+</body>
+</html>
