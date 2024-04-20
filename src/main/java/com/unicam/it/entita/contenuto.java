@@ -10,7 +10,7 @@ public class contenuto {
 
     private String desc;
 
-    private String comune;
+    private String punto;
 
 
 
@@ -20,6 +20,6 @@ public class contenuto {
     public String getDesc() {return desc;}
     public void setDesc(String name) {this.desc = name;}
 
-    public String getComune() {return comune;}
-    public void setComune(String comune) {this.comune = comune;}
+    public String getPunto() {return punto;}
+    public void setPunto(String punto) {this.punto = punto;}
 }

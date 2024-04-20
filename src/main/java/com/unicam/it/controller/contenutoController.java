@@ -31,7 +31,7 @@ public class contenutoController {
                     contenuto contenuto = new contenuto();
                     contenuto.setId(contenutoData[0]);
                     contenuto.setDesc(contenutoData[1]);
-                    contenuto.setComune(contenutoData[2]);
+                    contenuto.setPunto(contenutoData[2]);
                     contenutoRepository.save(contenuto);
                 }else {
                     System.err.println("Invalid product data in contenuti.txt.txt: " + line);
@@ -53,7 +53,7 @@ public class contenutoController {
             contenutoRepository.save(contenuto);
 
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(pathContenuto, true))) {
-                writer.write(contenuto.getId() + " " + contenuto.getDesc() + " " + contenuto.getComune()  + System.lineSeparator());
+                writer.write(contenuto.getId() + " " + contenuto.getDesc() + " " + contenuto.getPunto()  + System.lineSeparator());
             } catch (IOException e) {
                 System.err.println("Error writing to contenuti.txt.txt file: " + e.getMessage());
             }

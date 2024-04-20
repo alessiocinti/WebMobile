@@ -14,8 +14,8 @@
 <input type="text" id="contenutoId">
 <label for="contenutoDesc">Descrizione Contenuto:</label>
 <input type="text" id="contenutoDesc">
-<label for="contenutoComune">Comune Di Riferimento:</label>
-<input type="text" id="contenutoComune">
+<label for="contenutoPunto">Punto Di Rilievo:</label>
+<input type="text" id="contenutoPunto">
 <button onclick="createContenuto()">Aggiungi Contenuto</button>
 
 <h2>Elimina Contenuto</h2>
@@ -36,8 +36,8 @@
     function createContenuto() {
         const contenutoId = document.getElementById('contenutoId').value;
         const contenutoDesc = document.getElementById('contenutoDesc').value;
-        const contenutoComune = document.getElementById('contenutoComune').value;
-        const contenuto = { id: contenutoId, desc: contenutoDesc, comune: contenutoComune };
+        const contenutoPunto = document.getElementById('contenutoPunto').value;
+        const contenuto = { id: contenutoId, desc: contenutoDesc, punto: contenutoPunto };
 
         fetch(`${baseUrl}/contenuto`, {
             method: 'POST',
@@ -69,7 +69,7 @@
             .then(response => response.json())
             .then(data => {
                 const resultDiv = document.getElementById('contenutoResult');
-                resultDiv.innerHTML = `<p>ID: ${data.id}, Desc: ${data.desc}, Comune: ${data.comune}</p>`;
+                resultDiv.innerHTML = `<p>ID: ${data.id}, Desc: ${data.desc}, Punto: ${data.punto}</p>`;
             })
             .catch(error => console.error('Error:', error));
     }
