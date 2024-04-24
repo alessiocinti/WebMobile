@@ -18,8 +18,9 @@
 <input type="text" id="puntoDiRilievoId">
 <label for="puntoDiRilievoName">PuntoDiRilievo Name:</label>
 <input type="text" id="puntoDiRilievoName">
-<label for="puntoDiRilievoComuneDiRiferimento">ComuneDiRiferimento:</label>
-<input type="text" id="puntoDiRilievoComuneDiRiferimento">
+<label for="listaComuni">ComuneDiRiferimento:</label>
+<select id="listaComuni"></select>
+
 <button onclick="createPuntoDiRilievo()">Aggiungi PuntoDiRilievo</button>
 
 <h2>Elimina PuntoDiRilievo</h2>
@@ -53,13 +54,42 @@
             .catch(error => console.error('Error:', error));
     }
 
+    document.addEventListener('DOMContentLoaded', function() {
+        fetch(`${baseUrl}/comuni`)
+            .then(response => response.json())
+            .then(data => {
+                const comuni = [];
+                data.forEach(comune => {
+                    comuni.push(comune); // Aggiungi ogni oggetto comune all'array
+                });
+
+                listaComuni.innerHTML = '';
+
+                comuni.forEach(comune => {
+                    const option = document.createElement('option');
+                    option.value = comune.name;
+                    option.textContent = comune.name;
+                    listaComuni.appendChild(option);
+                });
+            })
+            .then(() => {
+            // Codice per gestire il recupero dei comuni e la creazione delle opzioni con successo
+        })
+        .catch(error => console.error('Error:', error));
+    });
+
     function createPuntoDiRilievo() {
         const puntoDiRilievoId = document.getElementById('puntoDiRilievoId').value;
         const puntoDiRilievoName = document.getElementById('puntoDiRilievoName').value;
-        const puntoDiRilievoComuneDiRiferimento = document.getElementById('puntoDiRilievoComuneDiRiferimento').value;
-        const puntoDiRilievo = { id: puntoDiRilievoId, name: puntoDiRilievoName, comuneDiRiferimento: puntoDiRilievoComuneDiRiferimento };
+
+        const listaComuni = document.getElementById('listaComuni')
+        const comuneSelezionato = listaComuni.value;
+
+        const puntoDiRilievo = { id: puntoDiRilievoId, name: puntoDiRilievoName, comuneDiRiferimento: comuneSelezionato };
+
 
         fetch(`${baseUrl}/puntoDiRilievo`, {
+
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

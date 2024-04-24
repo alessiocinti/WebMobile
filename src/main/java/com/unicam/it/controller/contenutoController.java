@@ -17,8 +17,8 @@ import java.util.List;
 public class contenutoController {
     private com.unicam.it.repository.contenutoRepository contenutoRepository;
 
-    //private String pathContenuto = "C:/Users/Alessio/OneDrive/Desktop/IdSProject/src/main/java/com/unicam/it/dati/contenuti.txt";
-    private String pathContenuto = "C:/Users/frato/OneDrive/Desktop/IdSProject/src/main/java/com/unicam/it/dati/contenuti.txt";
+    private String pathContenuto = "C:/Users/Alessio/OneDrive/Desktop/IdSProject/src/main/java/com/unicam/it/dati/contenuti.txt";
+    //private String pathContenuto = "C:/Users/frato/OneDrive/Desktop/IdSProject/src/main/java/com/unicam/it/dati/contenuti.txt";
 
     @Autowired
     public contenutoController(com.unicam.it.repository.contenutoRepository contenutoRepository){
