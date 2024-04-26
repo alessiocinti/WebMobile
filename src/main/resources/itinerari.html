@@ -14,8 +14,8 @@
 <input type="text" id="itinerarioId">
 <label for="itinerarioTitolo">Titolo Itinerario:</label>
 <input type="text" id="itinerarioTitolo">
-<label for="itinerarioComune">Comune di Riferimento:</label>
-<input type="text" id="itinerarioComune">
+<label for="listaComuni">ComuneDiRiferimento:</label>
+<select id="listaComuni"></select>
 <label for="itinerarioPunti">Punti Di Rilievo:</label>
 <input type="text" id="itinerarioPunti">
 <button onclick="createItinerario()">Aggiungi Itinerario</button>
@@ -35,12 +35,40 @@
 <script>
     const baseUrl = 'http://localhost:8080';
 
+    //Funzione lista comuni disponibili per la selezione
+    document.addEventListener('DOMContentLoaded', function() {
+        fetch(`${baseUrl}/comuni`)
+            .then(response => response.json())
+            .then(data => {
+                const comuni = [];
+                data.forEach(comune => {
+                    comuni.push(comune); // Aggiungi ogni oggetto comune all'array
+                });
+
+                listaComuni.innerHTML = '';
+
+                comuni.forEach(comune => {
+                    const option = document.createElement('option');
+                    option.value = comune.name;
+                    option.textContent = comune.name;
+                    listaComuni.appendChild(option);
+                });
+            })
+            .then(() => {
+            // Codice per gestire il recupero dei comuni e la creazione delle opzioni con successo
+        })
+        .catch(error => console.error('Error:', error));
+    });
+
+
+    //funzione creazione itinerario
     function createItinerario() {
         const itinerarioId = document.getElementById('itinerarioId').value;
         const itinerarioTitolo = document.getElementById('itinerarioTitolo').value;
-        const itinerarioComune = document.getElementById('itinerarioComune').value;
+        const listaComuni = document.getElementById('listaComuni')
+        const comuneSelezionato = listaComuni.value;
         const itinerarioPunti = document.getElementById('itinerarioPunti').value;
-        const itinerario = { id: itinerarioId, titolo: itinerarioTitolo, comune: itinerarioComune, punti: itinerarioPunti };
+        const itinerario = { id: itinerarioId, titolo: itinerarioTitolo, comune: comuneSelezionato, punti: itinerarioPunti };
 
         fetch(`${baseUrl}/itinerario`, {
             method: 'POST',
@@ -54,6 +82,7 @@
             .catch(error => console.error('Error:', error));
     }
 
+    //funzione eliminazione itinerario
     function deleteItinerario() {
         const itinerarioId = document.getElementById('deleteItinerarioId').value;
 
@@ -65,6 +94,7 @@
             .catch(error => console.error('Error:', error));
     }
 
+    //funzione get itinerario dando un id
     function getItinerarioById() {
         const itinerarioId = document.getElementById('getItinerarioId').value;
 

@@ -65,7 +65,7 @@
         .catch(error => console.error('Error:', error));
     });
 
-
+    //funzione creazione contest
     function createContest() {
         const contestId = document.getElementById('contestId').value;
         const contestTitolo = document.getElementById('contestTitolo').value;
@@ -89,6 +89,7 @@
             .catch(error => console.error('Error:', error));
     }
 
+    //funzione eliminazione contest
     function deleteContest() {
         const contestId = document.getElementById('deleteContestId').value;
 
@@ -100,6 +101,7 @@
             .catch(error => console.error('Error:', error));
     }
 
+    //visualizza contest scegliend id
     function getContestById() {
         const contestId = document.getElementById('getContestId').value;
 
@@ -111,8 +113,6 @@
             })
             .catch(error => console.error('Error:', error));
     }
-
-
 
 </script>
 </body>
