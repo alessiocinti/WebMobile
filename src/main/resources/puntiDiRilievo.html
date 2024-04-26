@@ -38,6 +38,7 @@
 <script>
     const baseUrl = 'http://localhost:8080';
 
+    //funzione get tutti i punti di Rilievo
     function getPuntiDiRilievo() {
         fetch(`${baseUrl}/puntiDiRilievo`)
             .then(response => response.json())
@@ -54,6 +55,7 @@
             .catch(error => console.error('Error:', error));
     }
 
+    //Funzione lista comuni disponibili per la selezione
     document.addEventListener('DOMContentLoaded', function() {
         fetch(`${baseUrl}/comuni`)
             .then(response => response.json())
@@ -78,6 +80,7 @@
         .catch(error => console.error('Error:', error));
     });
 
+    //funzione crazione punto di rileivo
     function createPuntoDiRilievo() {
         const puntoDiRilievoId = document.getElementById('puntoDiRilievoId').value;
         const puntoDiRilievoName = document.getElementById('puntoDiRilievoName').value;
@@ -101,6 +104,7 @@
             .catch(error => console.error('Error:', error));
     }
 
+    //funzione eliminazione punto di rilievo
     function deletePuntoDiRilievo() {
         const puntoDiRilievoId = document.getElementById('deletePuntoDiRilievoId').value;
 
@@ -112,6 +116,7 @@
             .catch(error => console.error('Error:', error));
     }
 
+    //visualizza punto di rileivo danto un id
     function getPuntoDiRilievoById() {
         const puntoDiRilievoId = document.getElementById('getPuntoDiRilievoId').value;
 
