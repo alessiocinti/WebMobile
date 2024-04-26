@@ -14,8 +14,13 @@
 <input type="text" id="contenutoId">
 <label for="contenutoDesc">Descrizione Contenuto:</label>
 <input type="text" id="contenutoDesc">
-<label for="contenutoPunto">Punto Di Rilievo:</label>
-<input type="text" id="contenutoPunto">
+<label for="listaComuni">Comune Di Riferimento:</label>
+<select id="listaComuni"></select>
+<button onclick="aggiornaPunti()">Aggiorna Punti Di Rilievo</button>
+
+<label for="listaPuntiDiRilievo">Punti Di Rilievo:</label>
+<select id="listaPuntiDiRilievo"></select>
+
 <button onclick="createContenuto()">Aggiungi Contenuto</button>
 
 <h2>Elimina Contenuto</h2>
@@ -33,11 +38,72 @@
 <script>
     const baseUrl = 'http://localhost:8080';
 
+    //Funzione lista comuni disponibili per la selezione
+    document.addEventListener('DOMContentLoaded', function() {
+        fetch(`${baseUrl}/comuni`)
+            .then(response => response.json())
+            .then(data => {
+                const comuni = [];
+                data.forEach(comune => {
+                    comuni.push(comune); // Aggiungi ogni oggetto comune all'array
+                });
+
+                listaComuni.innerHTML = '';
+
+                comuni.forEach(comune => {
+                    const option = document.createElement('option');
+                    option.value = comune.name;
+                    option.textContent = comune.name;
+                    listaComuni.appendChild(option);
+                });
+            })
+            .then(() => {
+            // Codice per gestire il recupero dei comuni e la creazione delle opzioni con successo
+        })
+        .catch(error => console.error('Error:', error));
+    });
+
+
+
+    //Funzione punti di rilievo disponibile per aggiunta contenuto
+    function aggiornaPunti() {
+        fetch(`${baseUrl}/puntiDiRilievo`)
+            .then(response => response.json())
+            .then(data => {
+                const comuneSelezionato = listaComuni.value;
+                const puntiDiRilievo = [];
+                data.forEach(punto => {
+                    puntiDiRilievo.push(punto); // Aggiungi ogni oggetto comune all'array
+                });
+
+                listaPuntiDiRilievo.innerHTML = '';
+
+                puntiDiRilievo.forEach(punto => {
+                    const option = document.createElement('option');
+                    option.value = punto.name;
+                    option.textContent = punto.name;
+                    if(punto.comuneDiRiferimento == comuneSelezionato)
+                        {
+                            listaPuntiDiRilievo.appendChild(option);
+                        }
+                });
+            })
+            .then(() => {
+            // Codice per gestire il recupero dei puntiDiRilievo e la creazione delle opzioni con successo
+        })
+        .catch(error => console.error('Error:', error));
+    }
+
+    //Funzione creazione contenuto
     function createContenuto() {
         const contenutoId = document.getElementById('contenutoId').value;
         const contenutoDesc = document.getElementById('contenutoDesc').value;
-        const contenutoPunto = document.getElementById('contenutoPunto').value;
-        const contenuto = { id: contenutoId, desc: contenutoDesc, punto: contenutoPunto };
+        const listaComuni = document.getElementById('listaComuni')
+        const comuneSelezionato = listaComuni.value;
+        const listaPuntiDiRilievo = document.getElementById('listaPuntiDiRilievo')
+        const puntoSelezionato = listaPuntiDiRilievo.value;
+
+        const contenuto = { id: contenutoId, desc: contenutoDesc, punto: puntoSelezionato };
 
         fetch(`${baseUrl}/contenuto`, {
             method: 'POST',
@@ -51,6 +117,7 @@
             .catch(error => console.error('Error:', error));
     }
 
+    //Funzione eliminazione contenuto
     function deleteContenuto() {
         const contenutoId = document.getElementById('deleteContenutoId').value;
 
@@ -62,6 +129,7 @@
             .catch(error => console.error('Error:', error));
     }
 
+    //Funzione visualizzazione contenuto dato Id
     function getContenutoById() {
         const contenutoId = document.getElementById('getContenutoId').value;
 
