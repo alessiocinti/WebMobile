@@ -17,8 +17,8 @@ public class puntoDiRilievoController {
 
     private com.unicam.it.repository.puntoDiRilievoRepository puntoDiRilievoRepository;
 
-    private String pathPuntiDiRilievo = "C:/Users/Alessio/OneDrive/Desktop/IdSProject/src/main/java/com/unicam/it/dati/puntiDiRilievo.txt";
-    //private String pathPuntiDiRilievo = "C:/Users/frato/OneDrive/Desktop/IdSProject/src/main/java/com/unicam/it/dati/puntiDiRilievo.txt";
+    //private String pathPuntiDiRilievo = "C:/Users/Alessio/OneDrive/Desktop/IdSProject/src/main/java/com/unicam/it/dati/puntiDiRilievo.txt";
+    private String pathPuntiDiRilievo = "C:/Users/frato/OneDrive/Desktop/IdSProject/src/main/java/com/unicam/it/dati/puntiDiRilievo.txt";
 
     @Autowired
     public puntoDiRilievoController(com.unicam.it.repository.puntoDiRilievoRepository puntoDiRilievoRepository){
@@ -26,7 +26,7 @@ public class puntoDiRilievoController {
         try (BufferedReader reader = new BufferedReader(new FileReader(pathPuntiDiRilievo))){
             String line;
             while ((line = reader.readLine()) != null) {
-                String[] puntoDiRilievoData = line.split(" ");
+                String[] puntoDiRilievoData = line.split("/");
                 if(puntoDiRilievoData.length == 3){
                     puntoDiRilievo puntoDiRilievo = new puntoDiRilievo();
                     puntoDiRilievo.setId(puntoDiRilievoData[0]);
@@ -60,7 +60,8 @@ public class puntoDiRilievoController {
             puntoDiRilievoRepository.save(puntoDiRilievo);
 
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(pathPuntiDiRilievo, true))) {
-                writer.write(puntoDiRilievo.getId() + " " + puntoDiRilievo.getName() + " " + puntoDiRilievo.getComuneDiRiferimento()  + System.lineSeparator());
+                writer.write(puntoDiRilievo.getId() + "/" + puntoDiRilievo.getName() + "/"
+                        + puntoDiRilievo.getComuneDiRiferimento()  + System.lineSeparator());
             } catch (IOException e) {
                 System.err.println("Error writing to puntiDiRilievo.txt file: " + e.getMessage());
             }
@@ -83,7 +84,7 @@ public class puntoDiRilievoController {
                 BufferedReader reader = new BufferedReader(new FileReader(pathPuntiDiRilievo));
                 String line;
                 while ((line = reader.readLine()) != null) {
-                    if (!line.startsWith(id + " ")) {
+                    if (!line.startsWith(id + "/")) {
                         updatedLines.add(line);
                     }
                 }

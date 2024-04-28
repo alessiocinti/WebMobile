@@ -17,8 +17,8 @@ import java.util.List;
 public class contenutoController {
     private com.unicam.it.repository.contenutoRepository contenutoRepository;
 
-    private String pathContenuto = "C:/Users/Alessio/OneDrive/Desktop/IdSProject/src/main/java/com/unicam/it/dati/contenuti.txt";
-    //private String pathContenuto = "C:/Users/frato/OneDrive/Desktop/IdSProject/src/main/java/com/unicam/it/dati/contenuti.txt";
+    //private String pathContenuto = "C:/Users/Alessio/OneDrive/Desktop/IdSProject/src/main/java/com/unicam/it/dati/contenuti.txt";
+    private String pathContenuto = "C:/Users/frato/OneDrive/Desktop/IdSProject/src/main/java/com/unicam/it/dati/contenuti.txt";
 
     @Autowired
     public contenutoController(com.unicam.it.repository.contenutoRepository contenutoRepository){
@@ -26,7 +26,7 @@ public class contenutoController {
         try (BufferedReader reader = new BufferedReader(new FileReader(pathContenuto))){
             String line;
             while ((line = reader.readLine()) != null) {
-                String[] contenutoData = line.split(" ");
+                String[] contenutoData = line.split("/");
                 if(contenutoData.length == 3){
                     contenuto contenuto = new contenuto();
                     contenuto.setId(contenutoData[0]);
@@ -53,7 +53,7 @@ public class contenutoController {
             contenutoRepository.save(contenuto);
 
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(pathContenuto, true))) {
-                writer.write(contenuto.getId() + " " + contenuto.getDesc() + " " + contenuto.getPunto()  + System.lineSeparator());
+                writer.write(contenuto.getId() + "/" + contenuto.getDesc() + "/" + contenuto.getPunto()  + System.lineSeparator());
             } catch (IOException e) {
                 System.err.println("Error writing to contenuti.txt.txt file: " + e.getMessage());
             }
@@ -75,7 +75,7 @@ public class contenutoController {
                 BufferedReader reader = new BufferedReader(new FileReader(pathContenuto));
                 String line;
                 while ((line = reader.readLine()) != null) {
-                    if (!line.startsWith(id + " ")) {
+                    if (!line.startsWith(id + "/")) {
                         updatedLines.add(line);
                     }
                 }

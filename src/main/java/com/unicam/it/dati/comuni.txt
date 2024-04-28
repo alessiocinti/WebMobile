@@ -1,5 +1,2 @@
-2 Ancona Marche
-3 Sant'ElpidioAMare Marche
-1 Fermo Marche
-4 PortoSanGiorgio Marche
-5 Camerino Marche
+1/Ancona/Marche
+2/Fermo/Marche

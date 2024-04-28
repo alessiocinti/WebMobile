@@ -18,8 +18,8 @@ public class comuneController {
 
     private com.unicam.it.repository.comuneRepository comuneRepository;
 
-    private String pathComune = "C:/Users/Alessio/OneDrive/Desktop/IdSProject/src/main/java/com/unicam/it/dati/comuni.txt";
-    //private String pathComune = "C:/Users/frato/OneDrive/Desktop/IdSProject/src/main/java/com/unicam/it/dati/comuni.txt";
+    //private String pathComune = "C:/Users/Alessio/OneDrive/Desktop/IdSProject/src/main/java/com/unicam/it/dati/comuni.txt";
+    private String pathComune = "C:/Users/frato/OneDrive/Desktop/IdSProject/src/main/java/com/unicam/it/dati/comuni.txt";
 
     @Autowired
     public comuneController(com.unicam.it.repository.comuneRepository comuneRepository){
@@ -27,7 +27,7 @@ public class comuneController {
         try (BufferedReader reader = new BufferedReader(new FileReader(pathComune))){
             String line;
             while ((line = reader.readLine()) != null) {
-                String[] comuneData = line.split(" ");
+                String[] comuneData = line.split("/");
                 if(comuneData.length == 3){
                     comune comune = new comune();
                     comune.setId(comuneData[0]);
@@ -61,7 +61,7 @@ public class comuneController {
             comuneRepository.save(comune);
 
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(pathComune, true))) {
-                writer.write(comune.getId() + " " + comune.getName() + " " + comune.getRegione()  + System.lineSeparator());
+                writer.write(comune.getId() + "/" + comune.getName() + "/" + comune.getRegione()  + System.lineSeparator());
             } catch (IOException e) {
                 System.err.println("Error writing to comuni.txt file: " + e.getMessage());
             }
@@ -83,7 +83,7 @@ public class comuneController {
                 BufferedReader reader = new BufferedReader(new FileReader(pathComune));
                 String line;
                 while ((line = reader.readLine()) != null) {
-                    if (!line.startsWith(id + " ")) {
+                    if (!line.startsWith(id + "/")) {
                         updatedLines.add(line);
                     }
                 }

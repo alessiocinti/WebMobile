@@ -17,8 +17,8 @@ public class contestController {
 
     private com.unicam.it.repository.contestRepository contestRepository;
 
-    private String pathContest = "C:/Users/Alessio/OneDrive/Desktop/IdSProject/src/main/java/com/unicam/it/dati/contest.txt";
-    //private String pathContest = "C:/Users/frato/OneDrive/Desktop/IdSProject/src/main/java/com/unicam/it/dati/contest.txt";
+    //private String pathContest = "C:/Users/Alessio/OneDrive/Desktop/IdSProject/src/main/java/com/unicam/it/dati/contest.txt";
+    private String pathContest = "C:/Users/frato/OneDrive/Desktop/IdSProject/src/main/java/com/unicam/it/dati/contest.txt";
 
 
     @Autowired
@@ -27,7 +27,7 @@ public class contestController {
         try (BufferedReader reader = new BufferedReader(new FileReader(pathContest))){
             String line;
             while ((line = reader.readLine()) != null) {
-                String[] contestData = line.split(" ");
+                String[] contestData = line.split("/");
                 if(contestData.length == 6){
                     contest contest = new contest();
                     contest.setId(contestData[0]);
@@ -60,9 +60,9 @@ public class contestController {
             contestRepository.save(contest);
 
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(pathContest, true))) {
-                writer.write(contest.getId() + " " + contest.getTitoloContest() + " " + contest.getDescrizioneContest() + " "
-                        + contest.getDataInizioContest() + " " + contest.getDataFineContest()
-                        + " " + contest.getComuneDiRiferimento() + System.lineSeparator());
+                writer.write(contest.getId() + "/" + contest.getTitoloContest() + "/" + contest.getDescrizioneContest() + "/"
+                        + contest.getDataInizioContest() + "/" + contest.getDataFineContest()
+                        + "/" + contest.getComuneDiRiferimento() + System.lineSeparator());
             } catch (IOException e) {
                 System.err.println("Error writing to contest.txt file: " + e.getMessage());
             }
@@ -84,7 +84,7 @@ public class contestController {
                 BufferedReader reader = new BufferedReader(new FileReader(pathContest));
                 String line;
                 while ((line = reader.readLine()) != null) {
-                    if (!line.startsWith(id + " ")) {
+                    if (!line.startsWith(id + "/")) {
                         updatedLines.add(line);
                     }
                 }

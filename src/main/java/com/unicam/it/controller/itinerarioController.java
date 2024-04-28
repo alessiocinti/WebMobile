@@ -16,8 +16,8 @@ import java.util.List;
 public class itinerarioController {
     private com.unicam.it.repository.itinerarioRepository itinerarioRepository;
 
-    private String pathItinerario = "C:/Users/Alessio/OneDrive/Desktop/IdSProject/src/main/java/com/unicam/it/dati/itinerari.txt";
-    //private String pathItinerario = "C:/Users/frato/OneDrive/Desktop/IdSProject/src/main/java/com/unicam/it/dati/itinerari.txt";
+    //private String pathItinerario = "C:/Users/Alessio/OneDrive/Desktop/IdSProject/src/main/java/com/unicam/it/dati/itinerari.txt";
+    private String pathItinerario = "C:/Users/frato/OneDrive/Desktop/IdSProject/src/main/java/com/unicam/it/dati/itinerari.txt";
 
     @Autowired
     public itinerarioController(com.unicam.it.repository.itinerarioRepository itinerarioRepository){
@@ -25,7 +25,7 @@ public class itinerarioController {
         try (BufferedReader reader = new BufferedReader(new FileReader(pathItinerario))){
             String line;
             while ((line = reader.readLine()) != null) {
-                String[] itinerarioData = line.split(" ");
+                String[] itinerarioData = line.split("/");
                 if(itinerarioData.length == 4){
                     itinerario itinerario = new itinerario();
                     itinerario.setId(itinerarioData[0]);
@@ -54,7 +54,8 @@ public class itinerarioController {
             itinerarioRepository.save(itinerario);
 
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(pathItinerario, true))) {
-                writer.write(itinerario.getId() + " " + itinerario.getTitolo() + " " + itinerario.getComune() + " " + itinerario.getPunti() + System.lineSeparator());
+                writer.write(itinerario.getId() + "/" + itinerario.getTitolo() + "/" + itinerario.getComune()
+                        + "/" + itinerario.getPunti() + System.lineSeparator());
             } catch (IOException e) {
                 System.err.println("Error writing to itinerari.txt file: " + e.getMessage());
             }
@@ -76,7 +77,7 @@ public class itinerarioController {
                 BufferedReader reader = new BufferedReader(new FileReader(pathItinerario));
                 String line;
                 while ((line = reader.readLine()) != null) {
-                    if (!line.startsWith(id + " ")) {
+                    if (!line.startsWith(id + "/")) {
                         updatedLines.add(line);
                     }
                 }
