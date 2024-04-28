@@ -18,8 +18,8 @@ public class comuneController {
 
     private com.unicam.it.repository.comuneRepository comuneRepository;
 
-    //private String pathComune = "C:/Users/Alessio/OneDrive/Desktop/IdSProject/src/main/java/com/unicam/it/dati/comuni.txt";
-    private String pathComune = "C:/Users/frato/OneDrive/Desktop/IdSProject/src/main/java/com/unicam/it/dati/comuni.txt";
+    private String pathComune = "C:/Users/Alessio/OneDrive/Desktop/IdSProject/src/main/java/com/unicam/it/dati/comuni.txt";
+    //private String pathComune = "C:/Users/frato/OneDrive/Desktop/IdSProject/src/main/java/com/unicam/it/dati/comuni.txt";
 
     @Autowired
     public comuneController(com.unicam.it.repository.comuneRepository comuneRepository){

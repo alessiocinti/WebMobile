@@ -17,8 +17,8 @@ public class contestController {
 
     private com.unicam.it.repository.contestRepository contestRepository;
 
-    //private String pathContest = "C:/Users/Alessio/OneDrive/Desktop/IdSProject/src/main/java/com/unicam/it/dati/contest.txt";
-    private String pathContest = "C:/Users/frato/OneDrive/Desktop/IdSProject/src/main/java/com/unicam/it/dati/contest.txt";
+    private String pathContest = "C:/Users/Alessio/OneDrive/Desktop/IdSProject/src/main/java/com/unicam/it/dati/contest.txt";
+    //private String pathContest = "C:/Users/frato/OneDrive/Desktop/IdSProject/src/main/java/com/unicam/it/dati/contest.txt";
 
 
     @Autowired
