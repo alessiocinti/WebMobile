@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <style>
+        .select-checkbox option::before {
+            content: "\2610";
+            width: 1.3em;
+            text-align: center;
+            display: inline-block;
+        }
+        .select-checkbox option:checked::before {
+            content: "\2611";
+        }
+    </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Client Itinerari</title>
@@ -14,10 +25,14 @@
 <input type="text" id="itinerarioId">
 <label for="itinerarioTitolo">Titolo Itinerario:</label>
 <input type="text" id="itinerarioTitolo">
+
 <label for="listaComuni">ComuneDiRiferimento:</label>
 <select id="listaComuni"></select>
-<label for="itinerarioPunti">Punti Di Rilievo:</label>
-<input type="text" id="itinerarioPunti">
+<button onclick="aggiornaPunti()">Aggiorna Punti Di Rilievo</button>
+
+<label for="listaPunti">Punti Di Rilievo:</label>
+<select id="listaPunti" multiple></select>
+
 <button onclick="createItinerario()">Aggiungi Itinerario</button>
 
 <h2>Elimina Itinerario</h2>
@@ -61,14 +76,44 @@
     });
 
 
+
+    //Funzione punti di rilievo disponibile per aggiunta contenuto
+    function aggiornaPunti() {
+    fetch(`${baseUrl}/puntiDiRilievo`)
+        .then(response => response.json())
+        .then(data => {
+            const comuneSelezionato = listaComuni.value;
+            const puntiDiRilievo = [];
+            data.forEach(punto => {
+                if (punto.comuneDiRiferimento === comuneSelezionato) {
+                    puntiDiRilievo.push(punto); // Aggiungi ogni oggetto comune all'array
+                }
+            });
+
+            listaPunti.innerHTML = '';
+
+            puntiDiRilievo.forEach(punto => {
+                const option = document.createElement('option');
+                option.value = punto.name;
+                option.textContent = punto.name;
+                listaPunti.appendChild(option);
+            });
+        })
+        .then(() => {
+            // Codice per gestire il recupero dei puntiDiRilievo e la creazione delle opzioni con successo
+        })
+        .catch(error => console.error('Error:', error));
+}
+
     //funzione creazione itinerario
     function createItinerario() {
         const itinerarioId = document.getElementById('itinerarioId').value;
         const itinerarioTitolo = document.getElementById('itinerarioTitolo').value;
         const listaComuni = document.getElementById('listaComuni')
         const comuneSelezionato = listaComuni.value;
-        const itinerarioPunti = document.getElementById('itinerarioPunti').value;
-        const itinerario = { id: itinerarioId, titolo: itinerarioTitolo, comune: comuneSelezionato, punti: itinerarioPunti };
+        const selectedPunti = Array.from(listaPunti.selectedOptions).map(option => option.value);
+        const puntiString = selectedPunti.join(' '); // Join values with commas
+        const itinerario = { id: itinerarioId, titolo: itinerarioTitolo, comune: comuneSelezionato, punti: puntiString };
 
         fetch(`${baseUrl}/itinerario`, {
             method: 'POST',
