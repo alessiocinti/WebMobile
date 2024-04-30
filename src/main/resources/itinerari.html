@@ -15,37 +15,74 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Client Itinerari</title>
+    <!-- Aggiungi il link al file CSS di Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 
-<h1>Client Itinerari</h1>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Client Itinerari</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="homepage.html">Homepage</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="comuni.html">Comuni</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="contenuti.html">Contenuti</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="contests.html">Contest</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="puntiDiRilievo.html">PuntiDiRilievo</a>
+            </li>
+        </ul>
+    </div>
+</nav>
 
-<h2>Aggiungi Itinerario</h2>
-<label for="itinerarioId">Itinerario ID:</label>
-<input type="text" id="itinerarioId">
-<label for="itinerarioTitolo">Titolo Itinerario:</label>
-<input type="text" id="itinerarioTitolo">
+<div class="container mt-4">
 
-<label for="listaComuni">ComuneDiRiferimento:</label>
-<select id="listaComuni"></select>
-<button onclick="aggiornaPunti()">Aggiorna Punti Di Rilievo</button>
+    <h1>Client Itinerari</h1>
 
-<label for="listaPunti">Punti Di Rilievo:</label>
-<select id="listaPunti" multiple></select>
+    <h2>Aggiungi Itinerario</h2>
+    <label for="itinerarioId">Itinerario ID:</label>
+    <input type="text" id="itinerarioId">
+    <label for="itinerarioTitolo">Titolo Itinerario:</label>
+    <input type="text" id="itinerarioTitolo">
 
-<button onclick="createItinerario()">Aggiungi Itinerario</button>
+    <label for="listaComuni">ComuneDiRiferimento:</label>
+    <select id="listaComuni"></select>
+    <button onclick="aggiornaPunti()" class="btn btn-primary">Aggiorna Punti Di Rilievo</button>
 
-<h2>Elimina Itinerario</h2>
-<label for="deleteItinerarioId">Itinerario ID:</label>
-<input type="text" id="deleteItinerarioId">
-<button onclick="deleteItinerario()">Elimina Itinerario</button>
+    <label for="listaPunti">Punti Di Rilievo:</label>
+    <select id="listaPunti" multiple></select>
 
-<h2>Ricerca Itinerario</h2>
-<label for="getItinerarioId">Itinerario ID:</label>
-<input type="text" id="getItinerarioId">
-<button onclick="getItinerarioById()">Ricerca Itinerario</button>
-<div id="itinerarioResult"></div>
+    <button onclick="createItinerario()" class="btn btn-success">Aggiungi Itinerario</button>
 
+    <h2>Elimina Itinerario</h2>
+    <label for="deleteItinerarioId">Itinerario ID:</label>
+    <input type="text" id="deleteItinerarioId">
+    <button onclick="deleteItinerario()" class="btn btn-danger">Elimina Itinerario</button>
+
+    <h2>Ricerca Itinerario</h2>
+    <label for="getItinerarioId">Itinerario ID:</label>
+    <input type="text" id="getItinerarioId">
+    <button onclick="getItinerarioById()" class="btn btn-primary">Ricerca Itinerario</button>
+    <div id="itinerarioResult"></div>
+
+</div>
+
+<!-- Aggiungi il link al file JavaScript di Bootstrap -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Aggiungi il link al file JavaScript di jQuery (richiesto per Bootstrap) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script>
     const baseUrl = 'http://localhost:8080';
@@ -74,8 +111,6 @@
         })
         .catch(error => console.error('Error:', error));
     });
-
-
 
     //Funzione punti di rilievo disponibile per aggiunta contenuto
     function aggiornaPunti() {
@@ -130,7 +165,9 @@
 
     //funzione eliminazione itinerario
     function deleteItinerario() {
-        const itinerarioId = document.getElementById('deleteItinerarioId').value;
+        const itinerarioId =
+
+ document.getElementById('deleteItinerarioId').value;
 
         fetch(`${baseUrl}/itinerario/${itinerarioId}`, {
             method: 'DELETE',

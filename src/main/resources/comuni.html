@@ -4,35 +4,72 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Client Comuni</title>
+    <!-- Aggiungi il link al file CSS di Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 
-<h1>Client Comuni</h1>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Client Comuni</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="homepage.html">Homepage</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="contenuti.html">Contenuti</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="contests.html">Contest</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="puntiDiRilievo.html">PuntiDiRilievo</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="itinerari.html">Itinerari</a>
+            </li>
+        </ul>
+    </div>
+</nav>
 
-<button onclick="getComuni()">Get Comuni</button>
-<h2>Lista Comuni</h2>
-<ul id="listaComuni"></ul>
+<div class="container mt-4">
 
-<h2>Aggiungi Comune</h2>
-<label for="comuneId">Comune ID:</label>
-<input type="text" id="comuneId">
-<label for="comuneName">Comune Name:</label>
-<input type="text" id="comuneName">
-<label for="comuneRegione">Comune Regione:</label>
-<input type="text" id="comuneRegione">
-<button onclick="createComune()">Aggiungi Comune</button>
+    <h1>Client Comuni</h1>
 
-<h2>Elimina Comune</h2>
-<label for="deleteComuneId">Comune ID:</label>
-<input type="text" id="deleteComuneId">
-<button onclick="deleteComune()">Elimina Comune</button>
+    <button onclick="getComuni()" class="btn btn-primary">Get Comuni</button>
+    <h2>Lista Comuni</h2>
+    <ul id="listaComuni"></ul>
 
-<h2>Ricerca Comune</h2>
-<label for="getComuneId">Comune ID:</label>
-<input type="text" id="getComuneId">
-<button onclick="getComuneById()">Ricerca Comune</button>
-<div id="comuneResult"></div>
+    <h2>Aggiungi Comune</h2>
+    <label for="comuneId">Comune ID:</label>
+    <input type="text" id="comuneId">
+    <label for="comuneName">Comune Name:</label>
+    <input type="text" id="comuneName">
+    <label for="comuneRegione">Comune Regione:</label>
+    <input type="text" id="comuneRegione">
+    <button onclick="createComune()" class="btn btn-success">Aggiungi Comune</button>
 
+    <h2>Elimina Comune</h2>
+    <label for="deleteComuneId">Comune ID:</label>
+    <input type="text" id="deleteComuneId">
+    <button onclick="deleteComune()" class="btn btn-danger">Elimina Comune</button>
+
+    <h2>Ricerca Comune</h2>
+    <label for="getComuneId">Comune ID:</label>
+    <input type="text" id="getComuneId">
+    <button onclick="getComuneById()" class="btn btn-primary">Ricerca Comune</button>
+    <div id="comuneResult"></div>
+
+</div>
+
+<!-- Aggiungi il link al file JavaScript di Bootstrap -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Aggiungi il link al file JavaScript di jQuery (richiesto per Bootstrap) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script>
 

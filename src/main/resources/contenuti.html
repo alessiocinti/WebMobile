@@ -4,36 +4,73 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Client Contenuti</title>
+    <!-- Aggiungi il link al file CSS di Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 
-<h1>Client Contenuti</h1>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Client Contenuti</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="homepage.html">Homepage</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="comuni.html">Comuni</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="contests.html">Contest</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="puntiDiRilievo.html">PuntiDiRilievo</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="itinerari.html">Itinerari</a>
+            </li>
+        </ul>
+    </div>
+</nav>
 
-<h2>Aggiungi Contenuto</h2>
-<label for="contenutoId">Contenuto ID:</label>
-<input type="text" id="contenutoId">
-<label for="contenutoDesc">Descrizione Contenuto:</label>
-<input type="text" id="contenutoDesc">
-<label for="listaComuni">Comune Di Riferimento:</label>
-<select id="listaComuni"></select>
-<button onclick="aggiornaPunti()">Aggiorna Punti Di Rilievo</button>
+<div class="container mt-4">
 
-<label for="listaPuntiDiRilievo">Punti Di Rilievo:</label>
-<select id="listaPuntiDiRilievo"></select>
+    <h1>Client Contenuti</h1>
 
-<button onclick="createContenuto()">Aggiungi Contenuto</button>
+    <h2>Aggiungi Contenuto</h2>
+    <label for="contenutoId">Contenuto ID:</label>
+    <input type="text" id="contenutoId">
+    <label for="contenutoDesc">Descrizione Contenuto:</label>
+    <input type="text" id="contenutoDesc">
+    <label for="listaComuni">Comune Di Riferimento:</label>
+    <select id="listaComuni"></select>
+    <button onclick="aggiornaPunti()" class="btn btn-primary">Aggiorna Punti Di Rilievo</button>
 
-<h2>Elimina Contenuto</h2>
-<label for="deleteContenutoId">Contenuto ID:</label>
-<input type="text" id="deleteContenutoId">
-<button onclick="deleteContenuto()">Elimina Contenuto</button>
+    <label for="listaPuntiDiRilievo">Punti Di Rilievo:</label>
+    <select id="listaPuntiDiRilievo"></select>
 
-<h2>Ricerca Contenuto</h2>
-<label for="getContenutoId">Contenuto ID:</label>
-<input type="text" id="getContenutoId">
-<button onclick="getContenutoById()">Ricerca Contenuto</button>
-<div id="contenutoResult"></div>
+    <button onclick="createContenuto()" class="btn btn-success">Aggiungi Contenuto</button>
 
+    <h2>Elimina Contenuto</h2>
+    <label for="deleteContenutoId">Contenuto ID:</label>
+    <input type="text" id="deleteContenutoId">
+    <button onclick="deleteContenuto()" class="btn btn-danger">Elimina Contenuto</button>
+
+    <h2>Ricerca Contenuto</h2>
+    <label for="getContenutoId">Contenuto ID:</label>
+    <input type="text" id="getContenutoId">
+    <button onclick="getContenutoById()" class="btn btn-primary">Ricerca Contenuto</button>
+    <div id="contenutoResult"></div>
+
+</div>
+
+<!-- Aggiungi il link al file JavaScript di Bootstrap -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Aggiungi il link al file JavaScript di jQuery (richiesto per Bootstrap) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script>
     const baseUrl = 'http://localhost:8080';
@@ -62,8 +99,6 @@
         })
         .catch(error => console.error('Error:', error));
     });
-
-
 
     //Funzione punti di rilievo disponibile per aggiunta contenuto
     function aggiornaPunti() {
