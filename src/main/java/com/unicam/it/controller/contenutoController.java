@@ -1,7 +1,6 @@
 package com.unicam.it.controller;
 
 import com.unicam.it.entita.contenuto;
-import com.unicam.it.entita.puntoDiRilievo;
 import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,11 +33,11 @@ public class contenutoController {
                     contenuto.setPunto(contenutoData[2]);
                     contenutoRepository.save(contenuto);
                 }else {
-                    System.err.println("Invalid product data in contenuti.txt.txt: " + line);
+                    System.err.println("Invalid product data in contenuti.txt: " + line);
                 }
             }
         }catch (IOException e){
-            System.err.println("Error reading contenuti.txt.txt file: " + e.getMessage());
+            System.err.println("Error reading contenuti.txt file: " + e.getMessage());
         }
     }
     @GetMapping("/contenuto")
@@ -55,7 +54,7 @@ public class contenutoController {
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(pathContenuto, true))) {
                 writer.write(contenuto.getId() + "/" + contenuto.getDesc() + "/" + contenuto.getPunto()  + System.lineSeparator());
             } catch (IOException e) {
-                System.err.println("Error writing to contenuti.txt.txt file: " + e.getMessage());
+                System.err.println("Error writing to contenuti.txt file: " + e.getMessage());
             }
 
             return new ResponseEntity<>("Contenuto Aggiunto", HttpStatus.OK);

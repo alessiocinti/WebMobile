@@ -112,7 +112,7 @@
         const listaComuni = document.getElementById('listaComuni')
         const comuneSelezionato = listaComuni.value;
         const selectedPunti = Array.from(listaPunti.selectedOptions).map(option => option.value);
-        const puntiString = selectedPunti.join(' '); // Join values with commas
+        const puntiString = selectedPunti.join(' ');
         const itinerario = { id: itinerarioId, titolo: itinerarioTitolo, comune: comuneSelezionato, punti: puntiString };
 
         fetch(`${baseUrl}/itinerario`, {

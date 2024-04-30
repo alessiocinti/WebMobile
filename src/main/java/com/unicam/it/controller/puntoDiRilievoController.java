@@ -1,6 +1,5 @@
 package com.unicam.it.controller;
 
-
 import com.unicam.it.entita.puntoDiRilievo;
 import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +14,11 @@ import java.util.List;
 @RestController
 public class puntoDiRilievoController {
 
+    @Autowired
     private com.unicam.it.repository.puntoDiRilievoRepository puntoDiRilievoRepository;
-
     private String pathPuntiDiRilievo = "C:/Users/Alessio/OneDrive/Desktop/IdSProject/src/main/java/com/unicam/it/dati/puntiDiRilievo.txt";
     //private String pathPuntiDiRilievo = "C:/Users/frato/OneDrive/Desktop/IdSProject/src/main/java/com/unicam/it/dati/puntiDiRilievo.txt";
+
 
     @Autowired
     public puntoDiRilievoController(com.unicam.it.repository.puntoDiRilievoRepository puntoDiRilievoRepository){
@@ -42,6 +42,8 @@ public class puntoDiRilievoController {
         }
     }
 
+
+
     @RequestMapping(value="/puntiDiRilievo")
     public ResponseEntity<Object> getPuntiDiRilievo(){
         return new ResponseEntity<>(puntoDiRilievoRepository.findAll(), HttpStatus.OK);
@@ -53,15 +55,19 @@ public class puntoDiRilievoController {
     }
 
 
+
     @PostMapping("/puntoDiRilievo")
     public ResponseEntity<Object> addPuntoDiRilievo(@RequestBody puntoDiRilievo puntoDiRilievo)
     {
+
+
+
         if (!puntoDiRilievoRepository.existsById(puntoDiRilievo.getId())) {
             puntoDiRilievoRepository.save(puntoDiRilievo);
 
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(pathPuntiDiRilievo, true))) {
                 writer.write(puntoDiRilievo.getId() + "/" + puntoDiRilievo.getName() + "/"
-                        + puntoDiRilievo.getComuneDiRiferimento()  + System.lineSeparator());
+                    + puntoDiRilievo.getComuneDiRiferimento() + System.lineSeparator());
             } catch (IOException e) {
                 System.err.println("Error writing to puntiDiRilievo.txt file: " + e.getMessage());
             }
