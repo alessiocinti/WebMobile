@@ -4,36 +4,73 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Client PuntiDiRilievo</title>
+    <!-- Aggiungi il link al file CSS di Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 
-<h1>Client PuntiDiRilievo</h1>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Client PuntiDiRilievo</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="homepage.html">Homepage</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="comuni.html">Comuni</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="contenuti.html">Contenuti</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="contests.html">Contest</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="itinerari.html">Itinerari</a>
+            </li>
+        </ul>
+    </div>
+</nav>
 
-<button onclick="getPuntiDiRilievo()">Get PuntiDiRilievo</button>
-<h2>Lista Punti Di Rilievo</h2>
-<ul id="listaPuntiDiRilievo"></ul>
+<div class="container mt-4">
 
-<h2>Aggiungi PuntoDiRilievo</h2>
-<label for="puntoDiRilievoId">PuntoDiRilievo ID:</label>
-<input type="text" id="puntoDiRilievoId">
-<label for="puntoDiRilievoName">PuntoDiRilievo Name:</label>
-<input type="text" id="puntoDiRilievoName">
-<label for="listaComuni">ComuneDiRiferimento:</label>
-<select id="listaComuni"></select>
+    <h1>Client PuntiDiRilievo</h1>
 
-<button onclick="createPuntoDiRilievo()">Aggiungi PuntoDiRilievo</button>
+    <button onclick="getPuntiDiRilievo()" class="btn btn-primary">Get PuntiDiRilievo</button>
+    <h2>Lista Punti Di Rilievo</h2>
+    <ul id="listaPuntiDiRilievo"></ul>
 
-<h2>Elimina PuntoDiRilievo</h2>
-<label for="deletePuntoDiRilievoId">PuntoDiRilievo ID:</label>
-<input type="text" id="deletePuntoDiRilievoId">
-<button onclick="deletePuntoDiRilievo()">Elimina PuntoDiRilievo</button>
+    <h2>Aggiungi PuntoDiRilievo</h2>
+    <label for="puntoDiRilievoId">PuntoDiRilievo ID:</label>
+    <input type="text" id="puntoDiRilievoId">
+    <label for="puntoDiRilievoName">PuntoDiRilievo Name:</label>
+    <input type="text" id="puntoDiRilievoName">
+    <label for="listaComuni">ComuneDiRiferimento:</label>
+    <select id="listaComuni"></select>
 
-<h2>Ricerca PuntoDiRilievo</h2>
-<label for="getPuntoDiRilievoId">PuntoDiRilievo ID:</label>
-<input type="text" id="getPuntoDiRilievoId">
-<button onclick="getPuntoDiRilievoById()">Ricerca PuntoDiRilievo</button>
-<div id="puntoDiRilievoResult"></div>
+    <button onclick="createPuntoDiRilievo()" class="btn btn-success">Aggiungi PuntoDiRilievo</button>
 
+    <h2>Elimina PuntoDiRilievo</h2>
+    <label for="deletePuntoDiRilievoId">PuntoDiRilievo ID:</label>
+    <input type="text" id="deletePuntoDiRilievoId">
+    <button onclick="deletePuntoDiRilievo()" class="btn btn-danger">Elimina PuntoDiRilievo</button>
+
+    <h2>Ricerca PuntoDiRilievo</h2>
+    <label for="getPuntoDiRilievoId">PuntoDiRilievo ID:</label>
+    <input type="text" id="getPuntoDiRilievoId">
+    <button onclick="getPuntoDiRilievoById()" class="btn btn-primary">Ricerca PuntoDiRilievo</button>
+    <div id="puntoDiRilievoResult"></div>
+
+</div>
+
+<!-- Aggiungi il link al file JavaScript di Bootstrap -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Aggiungi il link al file JavaScript di jQuery (richiesto per Bootstrap) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script>
     const baseUrl = 'http://localhost:8080';

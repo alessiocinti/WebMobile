@@ -4,39 +4,75 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Client Contest</title>
+    <!-- Aggiungi il link al file CSS di Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Client Contest</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="homepage.html">Homepage</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="comuni.html">Comuni</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="contenuti.html">Contenuti</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="puntiDiRilievo.html">PuntiDiRilievo</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="itinerari.html">Itinerari</a>
+            </li>
+        </ul>
+    </div>
+</nav>
 
-<h1>Client Contest</h1>
+<div class="container mt-4">
 
-<h2>Aggiungi Contest</h2>
-<label for="contestId">Contest ID:</label>
-<input type="text" id="contestId">
-<label for="contestTitolo">Contest Titolo:</label>
-<input type="text" id="contestTitolo">
-<label for="contestDescrizione">Descrizione Contest:</label>
-<input type="text" id="contestDescrizione">
-<label for="dataInizioContest">DataInizioContest:</label>
-<input type="text" id="dataInizioContest">
-<label for="dataFineContest">Data Fine Contest:</label>
-<input type="text" id="dataFineContest">
-<label for="listaComuni">ComuneDiRiferimento:</label>
-<select id="listaComuni"></select>
+    <h1>Client Contest</h1>
 
-<button onclick="createContest()">Aggiungi Contest</button>
+    <h2>Aggiungi Contest</h2>
+    <label for="contestId">Contest ID:</label>
+    <input type="text" id="contestId">
+    <label for="contestTitolo">Contest Titolo:</label>
+    <input type="text" id="contestTitolo">
+    <label for="contestDescrizione">Descrizione Contest:</label>
+    <input type="text" id="contestDescrizione">
+    <label for="dataInizioContest">DataInizioContest:</label>
+    <input type="text" id="dataInizioContest">
+    <label for="dataFineContest">Data Fine Contest:</label>
+    <input type="text" id="dataFineContest">
+    <label for="listaComuni">ComuneDiRiferimento:</label>
+    <select id="listaComuni"></select>
 
-<h2>Elimina Contest</h2>
-<label for="deleteContestId">Contest ID:</label>
-<input type="text" id="deleteContestId">
-<button onclick="deleteContest()">Elimina Contest</button>
+    <button onclick="createContest()" class="btn btn-primary">Aggiungi Contest</button>
 
-<h2>Ricerca Contest</h2>
-<label for="getContestId">Contest ID:</label>
-<input type="text" id="getContestId">
-<button onclick="getContestById()">Ricerca Contest</button>
-<div id="contestResult"></div>
+    <h2>Elimina Contest</h2>
+    <label for="deleteContestId">Contest ID:</label>
+    <input type="text" id="deleteContestId">
+    <button onclick="deleteContest()" class="btn btn-danger">Elimina Contest</button>
 
+    <h2>Ricerca Contest</h2>
+    <label for="getContestId">Contest ID:</label>
+    <input type="text" id="getContestId">
+    <button onclick="getContestById()" class="btn btn-primary">Ricerca Contest</button>
+    <div id="contestResult"></div>
+
+</div>
+
+<!-- Aggiungi il link al file JavaScript di Bootstrap -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Aggiungi il link al file JavaScript di jQuery (richiesto per Bootstrap) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script>
     const baseUrl = 'http://localhost:8080';
