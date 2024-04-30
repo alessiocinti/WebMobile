@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Menu di navigazione</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evSXhkEG3fnBS4T9hBoQyBXqbp++rn5WB5jyFLnDMkCTzJf8p/yxYX+mrYhFrmv" crossorigin="anonymous">
+    <style>
+        body {
+          font-family: Arial, sans-serif;  /* Set a clean, readable font */
+          text-align: center; /* Center content horizontally */
+        }
+        .nav-item {
+            margin-bottom: 50px;
+        }
+        h1 {
+          margin-bottom: 20px;  /* Add some space below the title */
+        }
+
+        .navbar {
+          background-color: transparent; /* Remove default navbar background */
+          border: none; /* Remove default navbar border */
+          padding: 0; /* Remove default navbar padding */
+        }
+
+        .navbar-nav {
+          display: flex;
+          flex-direction: column; /* Arrange buttons vertically */
+          align-items: center; /* Center buttons horizontally */
+          margin: 0;
+          padding: 0;
+          list-style: none; /* Remove default list bullets */
+          justify-content: space-between;
+        }
+
+        .btn-custom { /* Custom button styles */
+          background-image: url("banner.png"); /* Set background image */
+          background-size: cover; /* Stretch image to cover button */
+          background-position: center; /* Center image within button */
+          padding: 15px 25px; /* Adjust padding as needed */
+          color: white; /* Text color for readability on image background */
+          border: none; /* Remove default button border */
+          border-radius: 5px; /* Add rounded corners */
+          text-decoration: none; /* Remove underline from link text */
+          margin-bottom: 100px; /* Add spacing between buttons */
+        }
+
+        .btn-custom:hover { /* Hover effect for buttons */
+          opacity: 0.8; /* Slightly reduce opacity on hover */
+        }
+        h1 {
+            font-size: 40px;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar">
+    <h1>Homepage</h1>
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a href="http://localhost:63342/IdSProject/src/main/resources/comuni.html?_ijt=ikkg69quf1tr5sujqvf55qr8o3&_ij_reload=RELOAD_ON_SAVE" class="btn-custom">Comuni</a>
+        </li>
+        <li class="nav-item">
+            <a href="http://localhost:63342/IdSProject/src/main/resources/contenuti.html?_ijt=c5eis3f440qj0cbi30r16tsq19&_ij_reload=RELOAD_ON_SAVE" class="btn-custom">Contenuti</a>
+        </li>
+        <li class="nav-item">
+            <a href="http://localhost:63342/IdSProject/src/main/resources/contests.html?_ijt=c5eis3f440qj0cbi30r16tsq19&_ij_reload=RELOAD_ON_SAVE" class="btn-custom">Contest</a>
+        </li>
+        <li class="nav-item">
+            <a href="http://localhost:63342/IdSProject/src/main/resources/itinerari.html?_ijt=c5eis3f440qj0cbi30r16tsq19&_ij_reload=RELOAD_ON_SAVE" class="btn-custom">Itinerari</a>
+        </li>
+        <li class="nav-item">
+            <a href="http://localhost:63342/IdSProject/src/main/resources/puntiDiRilievo.html?_ijt=c5eis3f440qj0cbi30r16tsq19&_ij_reload=RELOAD_ON_SAVE" class="btn-custom">Punti di Rilievo</a>
+        </li>
+    </ul>
+</nav>
+</body>
+</html>
