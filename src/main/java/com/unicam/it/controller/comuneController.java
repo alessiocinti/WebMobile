@@ -1,33 +1,20 @@
 package com.unicam.it.controller;
 
-import com.unicam.it.dati.databaseConnection;
 import com.unicam.it.Dao.comuneDao;
 import com.unicam.it.entita.comune;
 import com.unicam.it.repository.comuneRepository;
-import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import java.sql.*;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:63342")
 @RestController
 public class comuneController {
 
-    private final comuneRepository comuneRepository;
-
     @Autowired
-    public comuneController(comuneRepository comuneRepository) {
-        this.comuneRepository = comuneRepository;
-    }
-
-    /*
-    @RequestMapping(value = "/comuni", method = RequestMethod.GET)
-    public ResponseEntity<Object> getComuni() {
-        return new ResponseEntity<>(comuneRepository.findAll(), HttpStatus.OK);
-    }*/
+    private comuneDao comuneDao;
 
     @GetMapping("/comuni")
     public ResponseEntity<List<comune>> getComuni() {

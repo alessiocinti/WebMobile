@@ -13,6 +13,13 @@ public class puntoDiRilievo {
     private String name;
     private String comuneDiRiferimento;
 
+    // Costruttore
+    public puntoDiRilievo(String id, String nome, String comuneDiRiferimento) {
+        this.id = id;
+        this.name = nome;
+        this.comuneDiRiferimento = comuneDiRiferimento;
+    }
+
     private String argomento;
     private String longitudine;
     private String latitudine;

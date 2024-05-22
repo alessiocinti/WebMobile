@@ -1,5 +1,0 @@
-1/Cervellone/Fermo
-2/Cervellone/Ancona
-3/Party/Fermo
-4/Party/Porto San Giorgio
-5/Circo/Porto San Giorgio

@@ -1,6 +1,7 @@
 package com.unicam.it.controller;
 
 import com.unicam.it.entita.puntoDiRilievo;
+import com.unicam.it.Dao.puntoDiRilievoDao;
 import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
@@ -15,101 +16,45 @@ import java.util.List;
 public class puntoDiRilievoController {
 
     @Autowired
-    private com.unicam.it.repository.puntoDiRilievoRepository puntoDiRilievoRepository;
-    private String pathPuntiDiRilievo = "C:/Users/Alessio/OneDrive/Desktop/Progetto Web mobile/src/main/java/com/unicam/it/dati/puntiDiRilievo.txt";
-    //private String pathPuntiDiRilievo = "C:/Users/frato/OneDrive/Desktop/IdSProject/src/main/java/com/unicam/it/dati/puntiDiRilievo.txt";
+    private puntoDiRilievoDao puntoDiRilievoDao;
+
+    // Metodo per recuperare tutti i punti di rilievo
+    @GetMapping("/puntiDiRilievo")
+    public ResponseEntity<List<puntoDiRilievo>> getPuntiDiRilievo() {
+        List<puntoDiRilievo> puntiDiRilievoList = puntoDiRilievoDao.getAllPuntiDiRilievo();
+        return new ResponseEntity<>(puntiDiRilievoList, HttpStatus.OK);
+    }
 
 
-    @Autowired
-    public puntoDiRilievoController(com.unicam.it.repository.puntoDiRilievoRepository puntoDiRilievoRepository){
-        this.puntoDiRilievoRepository = puntoDiRilievoRepository;
-        try (BufferedReader reader = new BufferedReader(new FileReader(pathPuntiDiRilievo))){
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] puntoDiRilievoData = line.split("/");
-                if(puntoDiRilievoData.length == 3){
-                    puntoDiRilievo puntoDiRilievo = new puntoDiRilievo();
-                    puntoDiRilievo.setId(puntoDiRilievoData[0]);
-                    puntoDiRilievo.setName(puntoDiRilievoData[1]);
-                    puntoDiRilievo.setComuneDiRiferimento(puntoDiRilievoData[2]);
-                    puntoDiRilievoRepository.save(puntoDiRilievo);
-                }else {
-                    System.err.println("Invalid product data in puntiDiRilievo.txt: " + line);
-                }
-            }
-        }catch (IOException e){
-            System.err.println("Error reading puntiDiRilievo.txt file: " + e.getMessage());
+    // Metodo per recuperare un punto di rilievo tramite ID
+    @GetMapping("/puntoDiRilievo")
+    public ResponseEntity<puntoDiRilievo> getPuntoDiRilievo(@PathParam("id") String id) {
+        puntoDiRilievo puntoDiRilievo = puntoDiRilievoDao.getPuntoDiRilievoById(id);
+        if (puntoDiRilievo != null) {
+            return new ResponseEntity<>(puntoDiRilievo, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
-
-
-    @RequestMapping(value="/puntiDiRilievo")
-    public ResponseEntity<Object> getPuntiDiRilievo(){
-        return new ResponseEntity<>(puntoDiRilievoRepository.findAll(), HttpStatus.OK);
-    }
-
-    @GetMapping("/puntoDiRilievo")
-    public ResponseEntity<Object> getPuntoDiRilievo(@PathParam("id") String id){
-        return new ResponseEntity<>(puntoDiRilievoRepository.findById(id), HttpStatus.OK);
-    }
-
-
-
+    //Metodo per aggiungere un punto di rilievo
     @PostMapping("/puntoDiRilievo")
-    public ResponseEntity<Object> addPuntoDiRilievo(@RequestBody puntoDiRilievo puntoDiRilievo)
-    {
-
-
-
-        if (!puntoDiRilievoRepository.existsById(puntoDiRilievo.getId())) {
-            puntoDiRilievoRepository.save(puntoDiRilievo);
-
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(pathPuntiDiRilievo, true))) {
-                writer.write(puntoDiRilievo.getId() + "/" + puntoDiRilievo.getName() + "/"
-                    + puntoDiRilievo.getComuneDiRiferimento() + System.lineSeparator());
-            } catch (IOException e) {
-                System.err.println("Error writing to puntiDiRilievo.txt file: " + e.getMessage());
-            }
-
+    public ResponseEntity<String> addPuntoDiRilievo(@RequestBody puntoDiRilievo puntoDiRilievo) {
+        if (!puntoDiRilievoDao.existsById(puntoDiRilievo.getId())) {
+            puntoDiRilievoDao.addPuntoDiRilievo(puntoDiRilievo);
             return new ResponseEntity<>("PuntoDiRilievo Aggiunto", HttpStatus.OK);
         } else {
             return new ResponseEntity<>("Il PuntoDiRilievo esiste già", HttpStatus.BAD_REQUEST);
         }
     }
 
-
     @DeleteMapping("/puntoDiRilievo/{id}")
-    public ResponseEntity<Object> delPuntoDiRilievo(@PathVariable("id") String id)
-    {
-        if (puntoDiRilievoRepository.existsById(id)) {
-            puntoDiRilievoRepository.deleteById(id);
-
-            try {
-                List<String> updatedLines = new ArrayList<>();
-                BufferedReader reader = new BufferedReader(new FileReader(pathPuntiDiRilievo));
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    if (!line.startsWith(id + "/")) {
-                        updatedLines.add(line);
-                    }
-                }
-                reader.close();
-
-                BufferedWriter writer = new BufferedWriter(new FileWriter(pathPuntiDiRilievo));
-                for (String updatedLine : updatedLines) {
-                    writer.write(updatedLine + System.lineSeparator());
-                }
-                writer.close();
-
-                return new ResponseEntity<>("PuntoDiRilievo Cancellato", HttpStatus.OK);
-            } catch (IOException e) {
-                System.err.println("Error updating puntiDiRilievo.txt file: " + e.getMessage());
-                return new ResponseEntity<>("Errore durante la cancellazione", HttpStatus.INTERNAL_SERVER_ERROR);
-            }
+    public ResponseEntity<String> delPuntoDiRilievo(@PathVariable("id") String id) {
+        if (puntoDiRilievoDao.existsById(id)) {
+            puntoDiRilievoDao.deleteById(id);
+            return new ResponseEntity<>("PuntoDiRilievo Cancellato", HttpStatus.OK);
         } else {
             return new ResponseEntity<>("PuntoDiRilievo non trovato", HttpStatus.NOT_FOUND);
         }
     }
-
 }
