@@ -16,7 +16,7 @@ import java.util.List;
 public class itinerarioController {
     private com.unicam.it.repository.itinerarioRepository itinerarioRepository;
 
-    private String pathItinerario = "C:/Users/Alessio/OneDrive/Desktop/IdSProject/src/main/java/com/unicam/it/dati/itinerari.txt";
+    private String pathItinerario = "C:/Users/Alessio/OneDrive/Desktop/Progetto Web mobile/src/main/java/com/unicam/it/dati/itinerari.txt";
     //private String pathItinerario = "C:/Users/frato/OneDrive/Desktop/IdSProject/src/main/java/com/unicam/it/dati/itinerari.txt";
 
     @Autowired

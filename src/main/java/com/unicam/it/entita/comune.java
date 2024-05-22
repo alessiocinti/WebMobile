@@ -14,6 +14,12 @@ public class comune {
 
     private String regione;
 
+    public comune(String id, String nome, String regione)
+    {
+        this.id = id;
+        this.name = nome;
+        this.regione = regione;
+    }
 
 
     public String getId() {return id;}

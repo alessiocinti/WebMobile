@@ -16,7 +16,7 @@ public class puntoDiRilievoController {
 
     @Autowired
     private com.unicam.it.repository.puntoDiRilievoRepository puntoDiRilievoRepository;
-    private String pathPuntiDiRilievo = "C:/Users/Alessio/OneDrive/Desktop/IdSProject/src/main/java/com/unicam/it/dati/puntiDiRilievo.txt";
+    private String pathPuntiDiRilievo = "C:/Users/Alessio/OneDrive/Desktop/Progetto Web mobile/src/main/java/com/unicam/it/dati/puntiDiRilievo.txt";
     //private String pathPuntiDiRilievo = "C:/Users/frato/OneDrive/Desktop/IdSProject/src/main/java/com/unicam/it/dati/puntiDiRilievo.txt";
 
 
