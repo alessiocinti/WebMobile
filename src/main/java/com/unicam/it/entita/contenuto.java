@@ -12,6 +12,12 @@ public class contenuto {
 
     private String punto;
 
+    public contenuto(String id, String desc, String puntoDiRiferimento)
+    {
+        this.id = id;
+        this.desc = desc;
+        this.punto = puntoDiRiferimento;
+    }
 
 
     public String getId() {return id;}
