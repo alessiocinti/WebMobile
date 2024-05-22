@@ -16,6 +16,15 @@ public class contest {
     private String dataFineContest;
     private String comuneDiRiferimento;
 
+    public contest(String id, String titolo, String descrizione, String dataInizio, String dataFine, String comuneDiRiferimento)
+    {
+        this.id=id;
+        this.titoloContest=titolo;
+        this.descrizioneContest=descrizione;
+        this.dataInizioContest=dataInizio;
+        this.dataFineContest=dataFine;
+        this.comuneDiRiferimento=comuneDiRiferimento;
+    }
 
 
     public String getId() {return id;}

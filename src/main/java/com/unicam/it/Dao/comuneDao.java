@@ -1,7 +1,7 @@
 package com.unicam.it.Dao;
 
 import com.unicam.it.entita.comune;
-import com.unicam.it.dati.databaseConnection;
+import com.unicam.it.databaseConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

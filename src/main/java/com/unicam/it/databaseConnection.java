@@ -1,4 +1,4 @@
-package com.unicam.it.dati;
+package com.unicam.it;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
