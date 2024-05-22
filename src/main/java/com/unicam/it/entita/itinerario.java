@@ -13,6 +13,14 @@ public class itinerario {
 
     private String punti;
 
+    public itinerario(String id, String titolo, String comuneDiRiferimento, String puntiSelezionati)
+    {
+        this.id = id;
+        this.titolo =titolo;
+        this.comune = comuneDiRiferimento;
+        this.punti = puntiSelezionati;
+    }
+
     public String getId() {return id;}
     public void setId(String id) {this.id = id;}
 
