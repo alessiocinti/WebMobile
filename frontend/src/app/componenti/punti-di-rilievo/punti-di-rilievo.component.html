@@ -1,0 +1,49 @@
+<div class="container mt-4">
+
+  <h1>Client PuntiDiRilievo</h1>
+
+  <button mat-raised-button color="primary" (click)="getPuntiDiRilievo()">Get PuntiDiRilievo</button>
+  <h2>Lista Punti Di Rilievo</h2>
+  <mat-list>
+    <mat-list-item *ngFor="let puntoDiRilievo of puntiDiRilievo">
+      <p>ID: {{ puntoDiRilievo.id }}, Name: {{ puntoDiRilievo.name }}, ComuneDiRiferimento: {{ puntoDiRilievo.comuneDiRiferimento }}</p>
+    </mat-list-item>
+  </mat-list>
+
+  <h2>Aggiungi PuntoDiRilievo</h2>
+  <mat-form-field>
+    <mat-label>PuntoDiRilievo ID</mat-label>
+    <input matInput type="text" [(ngModel)]="puntoDiRilievoId">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>PuntoDiRilievo Name</mat-label>
+    <input matInput type="text" [(ngModel)]="puntoDiRilievoName">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>ComuneDiRiferimento</mat-label>
+    <mat-select [(value)]="comuneSelezionato">
+      <mat-option *ngFor="let comune of comuni" [value]="comune.name">{{ comune.name }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" (click)="createPuntoDiRilievo()">Aggiungi PuntoDiRilievo</button>
+
+  <h2>Elimina PuntoDiRilievo</h2>
+  <mat-form-field>
+    <mat-label>PuntoDiRilievo ID</mat-label>
+    <input matInput type="text" [(ngModel)]="deletePuntoDiRilievoId">
+  </mat-form-field>
+  <button mat-raised-button color="warn" (click)="deletePuntoDiRilievo()">Elimina PuntoDiRilievo</button>
+
+  <h2>Ricerca PuntoDiRilievo</h2>
+  <mat-form-field>
+    <mat-label>PuntoDiRilievo ID</mat-label>
+    <input matInput type="text" [(ngModel)]="getPuntoDiRilievoId">
+  </mat-form-field>
+  <button mat-raised-button color="primary" (click)="getPuntoDiRilievoById()">Ricerca PuntoDiRilievo</button>
+
+  <div *ngIf="puntoDiRilievoResult">
+    <p>ID: {{ puntoDiRilievoResult.id }}, Name: {{ puntoDiRilievoResult.name }}, ComuneDiRiferimento: {{ puntoDiRilievoResult.comuneDiRiferimento }}</p>
+  </div>
+
+</div>

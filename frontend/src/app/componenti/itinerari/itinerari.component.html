@@ -1,0 +1,54 @@
+<!-- itinerari.component.html -->
+<h1>Client Itinerari</h1>
+
+<h2>Aggiungi Itinerario</h2>
+<form #itinerarioForm="ngForm" (ngSubmit)="createItinerario()">
+  <mat-form-field>
+    <mat-label>Itinerario ID</mat-label>
+    <input matInput type="text" id="itinerarioId" name="itinerarioId" [(ngModel)]="itinerario.id" required>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Titolo Itinerario</mat-label>
+    <input matInput type="text" id="itinerarioTitolo" name="itinerarioTitolo" [(ngModel)]="itinerario.titolo" required>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Comune di Riferimento</mat-label>
+    <mat-select id="listaComuni" name="listaComuni" [(ngModel)]="selectedComune" required>
+      <mat-option *ngFor="let comune of comuni" [value]="comune.name">{{ comune.name }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button mat-raised-button type="button" (click)="aggiornaPunti()" color="primary">Aggiorna Punti Di Rilievo</button>
+
+  <mat-form-field>
+    <mat-label>Punti Di Rilievo</mat-label>
+    <mat-select id="listaPunti" name="listaPunti" [(ngModel)]="selectedPunti" multiple required>
+      <mat-option *ngFor="let punto of puntiDiRilievo" [value]="punto.name">{{ punto.name }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-raised-button type="submit" color="primary">Aggiungi Itinerario</button>
+</form>
+
+<h2>Elimina Itinerario</h2>
+<form #deleteForm="ngForm" (ngSubmit)="deleteItinerario()">
+  <mat-form-field>
+    <mat-label>Itinerario ID</mat-label>
+    <input matInput type="text" id="deleteItinerarioId" name="deleteItinerarioId" [(ngModel)]="deleteId" required>
+  </mat-form-field>
+  <button mat-raised-button type="submit" color="warn">Elimina Itinerario</button>
+</form>
+
+<h2>Ricerca Itinerario</h2>
+<form #searchForm="ngForm" (ngSubmit)="getItinerarioById()">
+  <mat-form-field>
+    <mat-label>Itinerario ID</mat-label>
+    <input matInput type="text" id="getItinerarioId" name="getItinerarioId" [(ngModel)]="searchId" required>
+  </mat-form-field>
+  <button mat-raised-button type="submit" color="primary">Ricerca Itinerario</button>
+</form>
+
+<div id="itinerarioResult">
+  <p>ID: {{ itinerarioResult?.id }}, Titolo: {{ itinerarioResult?.titolo }}, Comune: {{ itinerarioResult?.comune }}, Punti: {{ itinerarioResult?.punti }}</p>
+</div>

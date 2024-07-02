@@ -1,0 +1,51 @@
+<div class="container mt-4">
+
+  <h1>Client Contest</h1>
+
+  <h2>Aggiungi Contest</h2>
+  <mat-form-field class="form-group">
+      <mat-label>Contest ID</mat-label>
+      <input matInput type="text" id="contestId" [(ngModel)]="contestId" required>
+  </mat-form-field>
+  <mat-form-field class="form-group">
+      <mat-label>Contest Titolo</mat-label>
+      <input matInput type="text" id="contestTitolo" [(ngModel)]="contestTitolo" required>
+  </mat-form-field>
+  <mat-form-field class="form-group">
+      <mat-label>Descrizione Contest</mat-label>
+      <input matInput type="text" id="contestDescrizione" [(ngModel)]="contestDescrizione" required>
+  </mat-form-field>
+  <mat-form-field class="form-group">
+      <mat-label>Data Inizio Contest</mat-label>
+      <input matInput type="date" id="dataInizioContest" [(ngModel)]="dataInizioContest" required>
+  </mat-form-field>
+  <mat-form-field class="form-group">
+      <mat-label>Data Fine Contest</mat-label>
+      <input matInput type="date" id="dataFineContest" [(ngModel)]="dataFineContest" required>
+  </mat-form-field>
+  <mat-form-field class="form-group">
+      <mat-label>Comune Di Riferimento</mat-label>
+      <mat-select id="listaComuni" [(ngModel)]="selectedComune" required>
+          <mat-option *ngFor="let comune of comuni" [value]="comune.name">{{ comune.name }}</mat-option>
+      </mat-select>
+  </mat-form-field>
+  <button mat-raised-button class="btn btn-primary" (click)="createContest()" [disabled]="!isFormValid()">Aggiungi Contest</button>
+
+  <h2>Elimina Contest</h2>
+  <mat-form-field class="form-group">
+      <mat-label>Contest ID</mat-label>
+      <input matInput type="text" id="deleteContestId" [(ngModel)]="deleteContestId">
+  </mat-form-field>
+  <button mat-raised-button class="btn btn-danger" (click)="deleteContest()">Elimina Contest</button>
+
+  <h2>Ricerca Contest</h2>
+  <mat-form-field class="form-group">
+      <mat-label>Contest ID</mat-label>
+      <input matInput type="text" id="getContestId" [(ngModel)]="getContestId">
+  </mat-form-field>
+  <button mat-raised-button class="btn btn-primary" (click)="getContestById()">Ricerca Contest</button>
+  <div id="contestResult">
+      <p>Id: {{ contestResult?.id }}, Titolo: {{ contestResult?.titoloContest }}, Descrizione: {{ contestResult?.descrizioneContest }}, Data Inizio: {{ contestResult?.dataInizioContest }}, Data Fine: {{ contestResult?.dataFineContest }}, Comune Di Riferimento: {{ contestResult?.comuneDiRiferimento }}</p>
+  </div>
+
+</div>

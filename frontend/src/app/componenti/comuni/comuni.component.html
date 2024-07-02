@@ -1,0 +1,50 @@
+<div class="container mt-4">
+  <h1>Client Comuni</h1>
+  <button mat-raised-button color="primary" (click)="getComuni()">Get Comuni</button>
+  <h2>Lista Comuni</h2>
+  <ul>
+    <li *ngFor="let comune of comuni">{{ comune.id }}, {{ comune.name }}, {{ comune.regione }}</li>
+  </ul>
+
+  <mat-card>
+    <h2>Aggiungi Comune</h2>
+    <form #comuneForm="ngForm" (ngSubmit)="createComune()">
+      <mat-form-field>
+        <mat-label>Comune ID</mat-label>
+        <input matInput [(ngModel)]="newComune.id" name="comuneId" required>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Comune Name</mat-label>
+        <input matInput [(ngModel)]="newComune.name" name="comuneName" required>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Comune Regione</mat-label>
+        <input matInput [(ngModel)]="newComune.regione" name="comuneRegione" required>
+      </mat-form-field>
+      <button mat-raised-button color="accent" type="submit" [disabled]="!comuneForm.valid">Aggiungi Comune</button>
+    </form>
+  </mat-card>
+
+  <mat-card>
+    <h2>Elimina Comune</h2>
+    <form #deleteForm="ngForm" (ngSubmit)="deleteComune()">
+      <mat-form-field>
+        <mat-label>Comune ID</mat-label>
+        <input matInput [(ngModel)]="deleteComuneId" name="deleteComuneId" required>
+      </mat-form-field>
+      <button mat-raised-button color="warn" type="submit">Elimina Comune</button>
+    </form>
+  </mat-card>
+
+  <mat-card>
+    <h2>Ricerca Comune</h2>
+    <form #searchForm="ngForm" (ngSubmit)="getComuneById()">
+      <mat-form-field>
+        <mat-label>Comune ID</mat-label>
+        <input matInput [(ngModel)]="getComuneId" name="getComuneId" required>
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit">Ricerca Comune</button>
+      <div>{{ comuneResult?.id }}, {{ comuneResult?.name }}, {{ comuneResult?.regione }}</div>
+    </form>
+  </mat-card>
+</div>

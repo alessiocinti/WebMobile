@@ -1,0 +1,49 @@
+<!-- contenuti.component.html -->
+<div class="container mt-4">
+
+  <h1>Client Contenuti</h1>
+
+  <h2>Aggiungi Contenuto</h2>
+  <mat-form-field class="form-group">
+      <mat-label>Contenuto ID</mat-label>
+      <input matInput type="text" id="contenutoId" [(ngModel)]="contenutoId">
+  </mat-form-field>
+  <mat-form-field class="form-group">
+      <mat-label>Descrizione Contenuto</mat-label>
+      <input matInput type="text" id="contenutoDesc" [(ngModel)]="contenutoDesc">
+  </mat-form-field>
+  <mat-form-field class="form-group">
+      <mat-label>Comune Di Riferimento</mat-label>
+      <mat-select id="listaComuni" [(ngModel)]="selectedComune">
+          <mat-option *ngFor="let comune of comuni" [value]="comune.name">{{ comune.name }}</mat-option>
+      </mat-select>
+  </mat-form-field>
+  <button mat-raised-button class="btn btn-primary" (click)="aggiornaPunti()">Aggiorna Punti Di Rilievo</button>
+
+  <mat-form-field class="form-group">
+      <mat-label>Punti Di Rilievo</mat-label>
+      <mat-select id="listaPuntiDiRilievo" [(ngModel)]="selectedPunto">
+          <mat-option *ngFor="let punto of puntiDiRilievo" [value]="punto.name">{{ punto.name }}</mat-option>
+      </mat-select>
+  </mat-form-field>
+
+  <button mat-raised-button class="btn btn-success" (click)="createContenuto()">Aggiungi Contenuto</button>
+
+  <h2>Elimina Contenuto</h2>
+  <mat-form-field class="form-group">
+      <mat-label>Contenuto ID</mat-label>
+      <input matInput type="text" id="deleteContenutoId" [(ngModel)]="deleteContenutoId">
+  </mat-form-field>
+  <button mat-raised-button class="btn btn-danger" (click)="deleteContenuto()">Elimina Contenuto</button>
+
+  <h2>Ricerca Contenuto</h2>
+  <mat-form-field class="form-group">
+      <mat-label>Contenuto ID</mat-label>
+      <input matInput type="text" id="getContenutoId" [(ngModel)]="getContenutoId">
+  </mat-form-field>
+  <button mat-raised-button class="btn btn-primary" (click)="getContenutoById()">Ricerca Contenuto</button>
+  <div id="contenutoResult">
+      <p>ID: {{ contenutoResult?.id }}, Desc: {{ contenutoResult?.desc }}, Punto: {{ contenutoResult?.punto }}</p>
+  </div>
+
+</div>
